@@ -1,9 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  scroll-snap-points-y: repeat(100vh);
+  scroll-snap-type: y proximity;
 }
 
 a {
@@ -22,5 +28,128 @@ a {
   body {
     color: white;
     background: black;
+  }
+}
+
+@font-face {
+  font-family: HeadFont;
+  src: url("../public/font/Goblin_One/GoblinOne-Regular.ttf");
+}
+
+@font-face {
+  font-family: SecFont;
+  src: url("../public/font/Marcellus/Marcellus-Regular.ttf");
+}
+
+@font-face {
+  font-family: Berk;
+  src: url("../public/font/Berkshire_Swash/BerkshireSwash-Regular.ttf");
+}
+
+@font-face {
+  font-family: Poppins;
+  src: url("../public/font/Poppins/Poppins-Regular.ttf");
+}
+
+@font-face {
+  font-family: PlayFair;
+  src: url("../public/font/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: Noto;
+  src: url("../public/font/Cormorant/Cormorant-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: Oswald;
+  src: url("../public/font/Oswald/Oswald-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: PlayI;
+  src: url("../public/font/PT_Serif/PTSerif-Italic.ttf");
+}
+
+@font-face {
+  font-family: Notos;
+  src: url("../public/font/Noto_Serif/NotoSerif-BoldItalic.ttf");
+}
+
+@font-face {
+  font-family: IMFELL;
+  src: url("../public/font/IM_Fell_English/IMFellEnglish-Regular.ttf");
+}
+
+@font-face {
+  font-family: Grad;
+  src: url("../public/font/Graduate/Graduate-Regular.ttf");
+}
+
+.snapCont {
+  scroll-snap-type: y mandatory;
+}
+
+.snapChild {
+  scroll-snap-align: start;
+}
+
+.altSnapCont {
+  scroll-snap-type: y mandatory;
+}
+
+.linesB {
+  min-height: 100%;
+  background: linear-gradient(black 0 0) calc(1 * 100% / 6),
+    linear-gradient(black 0 0) calc(2 * 100% / 6),
+    linear-gradient(black 0 0) calc(3 * 100% / 6),
+    linear-gradient(black 0 0) calc(4 * 100% / 6),
+    linear-gradient(black 0 0) calc(5 * 100% / 6);
+
+  background-size: 1px 100%; /* Control the width here*/
+  background-repeat: no-repeat;
+}
+
+.linesW {
+  min-height: 100%;
+  background-color: black;
+  background: linear-gradient(white 0 0) calc(1 * 100% / 6),
+    linear-gradient(white 0 0) calc(2 * 100% / 6),
+    linear-gradient(white 0 0) calc(3 * 100% / 6),
+    linear-gradient(white 0 0) calc(4 * 100% / 6),
+    linear-gradient(white 0 0) calc(5 * 100% / 6);
+  background-size: 1px 100%; /* Control the width here*/
+  background-repeat: no-repeat;
+}
+
+.marquee {
+  margin: 0 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  position: absolute;
+  width: 98vw;
+  padding: 2;
+}
+
+.marquee span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 6s linear infinite;
+}
+
+.marquee2 span {
+  animation-delay: 3s;
+}
+
+.marquee3 span {
+  animation-delay: 5s;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100%, 0);
   }
 }

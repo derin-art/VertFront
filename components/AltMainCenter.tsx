@@ -1,0 +1,198 @@
+import { motion } from "framer-motion";
+import N13 from "../public/TestImages/N13.jpg";
+import V5 from "../public/TestImages/V5.jpg";
+import Center1 from "../public/TestImages/Center1.jpg";
+import Image from "next/image";
+import { AnimatePresence } from "framer-motion";
+import { useState } from "react";
+
+type AltMainCenterProps = {
+  openTimeLine: boolean;
+  other?: boolean;
+};
+
+export default function AltMainCenter(props: AltMainCenterProps) {
+  const collectionsStand = [N13, V5];
+  const [other, setOther] = useState(false);
+
+  const variants = {
+    out: {
+      opacity: 0,
+      y: -40,
+      transition: {
+        duration: 0.55,
+      },
+    },
+    in: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.55,
+        delay: 0.3,
+      },
+    },
+  };
+
+  const centerVariants = {
+    out: {
+      opacity: 0,
+
+      transition: {
+        duration: 0.55,
+      },
+    },
+    in: {
+      opacity: 1,
+
+      transition: {
+        duration: 0.55,
+        delay: 0.3,
+      },
+    },
+  };
+
+  const imageVariants = {
+    out: {
+      opacity: 0,
+      x: -40,
+      transition: {
+        duration: 0.55,
+      },
+    },
+    in: {
+      opacity: 1,
+      x: 10,
+      transition: {
+        duration: 0.55,
+        delay: 0.3,
+      },
+    },
+  };
+  return (
+    <motion.div className="absolute ">
+      <div className="relative flex items-center justify-center relative duration-300">
+        <AnimatePresence>
+          <motion.div
+            animate="in"
+            initial="out"
+            exit={"out"}
+            className=""
+            variants={centerVariants}
+            transition={{
+              duration: 0.55,
+            }}
+            whileInView={{
+              opacity: 1,
+            }}
+          >
+            <div className="absolute z-40 text-black font-Poppins bottom-2 left-2 text-xs">
+              2022 collection
+            </div>
+            {props.openTimeLine && (
+              <Image
+                src={Center1.src}
+                height="400"
+                width="300"
+                className={` z-40 border-black border-1 duration-300`}
+                alt="TestImage"
+              ></Image>
+            )}
+          </motion.div>
+        </AnimatePresence>
+        <AnimatePresence>
+          <div className="relative flex ">
+            <div className="flex z-50">
+              {!props.openTimeLine &&
+                collectionsStand.map((item, index) => {
+                  return (
+                    <motion.div
+                      animate="in"
+                      initial="out"
+                      exit={"out"}
+                      transition={{
+                        delay: index === 0 ? 0.2 : 0.4,
+                      }}
+                      variants={imageVariants}
+                      key={String(`${props.openTimeLine}-${index}`)}
+                      className="flex "
+                    >
+                      {" "}
+                      <Image
+                        key={index}
+                        src={item.src}
+                        height="300"
+                        width="200"
+                        className={` z-30 border-white mr-24 border-4`}
+                        alt="TestImage"
+                      ></Image>
+                    </motion.div>
+                  );
+                })}
+            </div>
+          </div>
+        </AnimatePresence>
+
+        <AnimatePresence>
+          <motion.div
+            initial={{
+              opacity: 0,
+              rotate: 90,
+              marginTop: "-130px",
+            }}
+            whileInView={{
+              opacity: 1,
+
+              marginTop: "0px",
+            }}
+            animate="in"
+            exit={"out"}
+            variants={variants}
+            key={String(props.openTimeLine)}
+            transition={{ duration: 0.6 }}
+            className={`${
+              !props.other ? "text-[#0A090C]" : "text-white"
+            } z-30 lg:text-[250px] md:text-[200px] text-[100px] rotate-90 font-IMFELL font-bold absolute duration-300`}
+          >
+            {props.openTimeLine ? (
+              <>
+                <motion.div> Est. </motion.div>
+                <motion.div className="">1988</motion.div>
+              </>
+            ) : (
+              <></>
+            )}
+          </motion.div>
+        </AnimatePresence>
+        <AnimatePresence>
+          <motion.div
+            initial={{
+              opacity: 0,
+
+              marginTop: "-130px",
+            }}
+            whileInView={{
+              opacity: 1,
+
+              marginTop: "0px",
+            }}
+            animate="in"
+            exit={"out"}
+            variants={variants}
+            key={String(props.openTimeLine)}
+            transition={{ duration: 0.6 }}
+            className="text-gray-800 text-[200px] font-PlayFair font-bold absolute "
+          >
+            {!props.openTimeLine ? (
+              <>
+                <motion.div> Est. </motion.div>
+                <motion.div>1988</motion.div>
+              </>
+            ) : (
+              <></>
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </motion.div>
+  );
+}
