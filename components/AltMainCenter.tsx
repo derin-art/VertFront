@@ -71,6 +71,7 @@ export default function AltMainCenter(props: AltMainCenterProps) {
   return (
     <motion.div className="absolute ">
       <div className="relative flex items-center justify-center relative duration-300">
+        {/* Rendering main page Image */}
         <AnimatePresence>
           <motion.div
             animate="in"
@@ -85,20 +86,24 @@ export default function AltMainCenter(props: AltMainCenterProps) {
               opacity: 1,
             }}
           >
-            <div className="absolute z-40 text-black font-Poppins bottom-2 left-2 text-xs">
-              2022 collection
-            </div>
             {props.openTimeLine && (
-              <Image
-                src={Center1.src}
-                height="400"
-                width="300"
-                className={` z-40 border-black border-1 duration-300`}
-                alt="TestImage"
-              ></Image>
+              <>
+                <div className="absolute z-40 text-black font-Poppins bottom-2 left-2 text-xs">
+                  2022 collection
+                </div>
+                <Image
+                  src={Center1.src}
+                  height="400"
+                  width="300"
+                  className={` z-40 border-black border-1 duration-300`}
+                  alt="TestImage"
+                ></Image>
+              </>
             )}
           </motion.div>
         </AnimatePresence>
+
+        {/* Rendering images on TimeLine Open prop */}
         <AnimatePresence>
           <div className="relative flex ">
             <div className="flex z-50">
@@ -122,7 +127,7 @@ export default function AltMainCenter(props: AltMainCenterProps) {
                         src={item.src}
                         height="300"
                         width="200"
-                        className={` z-30 border-white mr-24 border-4`}
+                        className={` z-30 border-white sm:mr-24 -ml-4 border-4`}
                         alt="TestImage"
                       ></Image>
                     </motion.div>
@@ -132,6 +137,7 @@ export default function AltMainCenter(props: AltMainCenterProps) {
           </div>
         </AnimatePresence>
 
+        {/* Rendering Main page est.1988 */}
         <AnimatePresence>
           <motion.div
             initial={{
@@ -150,8 +156,8 @@ export default function AltMainCenter(props: AltMainCenterProps) {
             key={String(props.openTimeLine)}
             transition={{ duration: 0.6 }}
             className={`${
-              !props.other ? "text-[#0A090C]" : "text-white"
-            } z-30 lg:text-[250px] md:text-[200px] text-[100px] rotate-90 font-IMFELL font-bold absolute duration-300`}
+              !props.other ? "text-AltBlack" : "text-white"
+            } z-30 lg:text-[250px] md:text-[200px] text-[100px] rotate-90 font-IMFELL font-bold absolute`}
           >
             {props.openTimeLine ? (
               <>
@@ -163,32 +169,28 @@ export default function AltMainCenter(props: AltMainCenterProps) {
             )}
           </motion.div>
         </AnimatePresence>
+
+        {/* Rendering Time page est.1988 */}
         <AnimatePresence>
           <motion.div
             initial={{
               opacity: 0,
-
-              marginTop: "-130px",
             }}
             whileInView={{
               opacity: 1,
-
-              marginTop: "0px",
             }}
             animate="in"
             exit={"out"}
             variants={variants}
             key={String(props.openTimeLine)}
             transition={{ duration: 0.6 }}
-            className="text-gray-800 text-[200px] font-PlayFair font-bold absolute "
+            className="text-gray-800 xl:text-[200px] text-[100px] font-PlayFair font-bold absolute "
           >
-            {!props.openTimeLine ? (
+            {!props.openTimeLine && (
               <>
                 <motion.div> Est. </motion.div>
                 <motion.div>1988</motion.div>
               </>
-            ) : (
-              <></>
             )}
           </motion.div>
         </AnimatePresence>

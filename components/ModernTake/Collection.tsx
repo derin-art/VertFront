@@ -36,7 +36,7 @@ export default function Collection() {
         other ? "bg-white" : "bg-black"
       } relative flex overflow-x-hidden duration-300 items-end snapChild justify-start border-b border-black`}
     >
-      <div className="flex font-SecFont w-full text-[150px] absolute  self-start mt-14 text-red-500">
+      <div className="flex font-SecFont w-full text-[80px] lg:text-[120px]  xl:text-[150px] absolute  self-start mt-14 text-red-500">
         <motion.div
           initial={{
             opacity: 0,
@@ -50,7 +50,12 @@ export default function Collection() {
           viewport={{ once: false }}
           className="absolute -right-[300px]"
         >
-          Collection
+          <motion.span
+            className={`font-PlayI  ${other ? "text-AltBlack" : "text-white"}`}
+          >
+            Popular
+          </motion.span>{" "}
+          Collections
         </motion.div>
         <motion.div
           initial={{
@@ -84,52 +89,6 @@ export default function Collection() {
           </span>
         </p>
       </div>
-      <motion.div
-        initial={{
-          opacity: 0,
-        }}
-        whileInView={{
-          opacity: 1,
-          skewX: 0,
-        }}
-        onAnimationComplete={() => {
-          setOther((prev) => !prev);
-        }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-        viewport={{ once: false }}
-        className="flex ml-20  mb-8 w-full relative items-center hidden"
-      >
-        <motion.div className="p-6 mr-4">
-          {images.slice(0, 2).map((item, index) => {
-            return (
-              <CollectionImage
-                width={150}
-                height={500}
-                img={item.img}
-                word={"Casual"}
-                key={index}
-                version={item.name}
-                other={other}
-              ></CollectionImage>
-            );
-          })}
-        </motion.div>
-        <motion.div className="p-6">
-          {images.slice(2, 4).map((item, index) => {
-            return (
-              <CollectionImage
-                width={150}
-                height={500}
-                img={item.img}
-                word={"Casual"}
-                key={index}
-                version={item.name}
-                other={other}
-              ></CollectionImage>
-            );
-          })}
-        </motion.div>
-      </motion.div>
 
       <motion.div
         initial={{
@@ -144,9 +103,9 @@ export default function Collection() {
         }}
         transition={{ duration: 0.6, delay: 0.4 }}
         viewport={{ once: false }}
-        className="flex w-full items-center justify-center h-full "
+        className="flex w-full items-center justify-center h-full"
       >
-        <motion.div className="lg:mt-[123px] mt-[74px] flex">
+        <motion.div className="lg:mt-[123px] mt-[74px] flex  sm:flex-row">
           {images.map((item, index) => {
             return (
               <div className="mb-6" key={index}>

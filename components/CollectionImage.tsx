@@ -16,10 +16,10 @@ export default function CollectionImage(props: CollectionImageProps) {
     if (version === "Formal") {
       return (
         <div
-          className={`absolute text-4xl ${
+          className={`absolute text-4xl hidden sm: ${
             vertical ? "top-8" : " top-8 "
           } -right-2 font-SecFont duration-300 ${
-            props.other ? "text-red-500" : "text-gray-600"
+            props.other ? "text-red-500" : "text-PineGreen"
           }`}
         >
           {version}
@@ -28,7 +28,7 @@ export default function CollectionImage(props: CollectionImageProps) {
     } else if (version === "Casual") {
       return (
         <div
-          className={`absolute text-5xl   ${
+          className={`absolute text-5xl hidden sm:  ${
             vertical ? "left-[45px] bottom-10" : "left-24 bottom-10"
           } font-Poppins tracking-[20px] text-white`}
         >
@@ -38,7 +38,7 @@ export default function CollectionImage(props: CollectionImageProps) {
     } else if (version === "Risque") {
       return (
         <div
-          className={`absolute text-3xl   ${
+          className={`absolute text-3xl hidden sm:   ${
             vertical ? "left-[116px] top-8" : "left-24 top-8"
           } font-PlayI text-red-500`}
         >
@@ -60,10 +60,15 @@ export default function CollectionImage(props: CollectionImageProps) {
 
   return (
     <div
-      className={`relative ${vertical ? "p-8" : "p-2"} ${
+      className={`relative flex flex-col items-center jusify-center ${
+        vertical ? "lg:p-8 p-2" : "p-2"
+      } ${
         props.version === "Jewerly" && "hidden"
       } hover:scale-105 duration-300 z-50`}
     >
+      <div className="absolute -bottom-4 text-red-500 font-SecFont md:text-2xl">
+        {props.version === "Risque" ? "NightLife" : props.version}
+      </div>
       <div className="">
         {header(props.version)}
         <div
@@ -82,7 +87,9 @@ export default function CollectionImage(props: CollectionImageProps) {
           className={`${
             props.version === "Jewerly" && "rotate-90"
           } object-cover ${
-            vertical ? "h-[400px] w-[300px]" : "h-[200px] w-[200px]"
+            vertical
+              ? "lg:h-[400px] lg:w-[300px] h-[200px] w-[150px]"
+              : "h-[200px] w-[200px]"
           } border-y-2 ${
             !props.other ? "border-white" : "border-black border"
           } ${props.version === "Formal" ? "border-x-2" : "border-x-2"}`}

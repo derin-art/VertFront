@@ -35,7 +35,7 @@ export default function Home() {
         transition={{ duration: 0.8 }}
         viewport={{ once: false }}
       >
-        <AltMainPage other={other}></AltMainPage>
+        <AltMainPage></AltMainPage>
       </motion.div>
       <NewXpage></NewXpage>
       <Collection></Collection>

@@ -31,6 +31,7 @@ module.exports = {
         TiWhite: "#fafafa",
         DarkPine: "#002626",
         LauGreen: "#92AD94",
+        AltBlack: "#0A090C",
       },
     },
   },

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 export default function Mheader() {
   const Links = ["home", "collection"];
   return (
-    <div className="w-full font-Poppins text-xs fixed flex items-center z-50 bg-black text-white border-y border-white">
+    <div className="w-full font-Poppins text-xs fixed flex items-center z-50 bg-AltBlack text-white border-y border-white">
       <div className="">
         {Links.map((item, index) => {
           return (

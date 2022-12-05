@@ -13,9 +13,7 @@ export default function AltMainPage(props: AltMainPageProps) {
   const [openTimeLine, setOpenTimeLine] = useState(true);
   const borderSol = [1, 2, 3, 4, 5, 6];
   return (
-    <div
-      className={`duration-300  h-screen bg-white p-4 pt-8 font-Poppins linesB`}
-    >
+    <div className={` h-screen bg-white p-4 pt-8 font-Poppins linesB`}>
       <div className="text-[#0A090C] flex relative ">
         <button
           onClick={() => {
