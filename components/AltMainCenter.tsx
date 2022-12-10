@@ -91,11 +91,15 @@ export default function AltMainCenter(props: AltMainCenterProps) {
                 <div className="absolute z-40 text-black font-Poppins bottom-2 left-2 text-xs">
                   2022 collection
                 </div>
+                <div className="absolute z-40 text-red-500 font-PlayI top-2 left-2">
+                  VERT
+                </div>
                 <Image
                   src={Center1.src}
                   height="400"
                   width="300"
-                  className={` z-40 border-black border-1 duration-300`}
+                  unoptimized={true}
+                  className={` z-40 border-black border-2 duration-300`}
                   alt="TestImage"
                 ></Image>
               </>
@@ -106,7 +110,7 @@ export default function AltMainCenter(props: AltMainCenterProps) {
         {/* Rendering images on TimeLine Open prop */}
         <AnimatePresence>
           <div className="relative flex ">
-            <div className="flex z-50">
+            <div className="flex z-50  items-center justify-center -mr-2">
               {!props.openTimeLine &&
                 collectionsStand.map((item, index) => {
                   return (
@@ -119,15 +123,19 @@ export default function AltMainCenter(props: AltMainCenterProps) {
                       }}
                       variants={imageVariants}
                       key={String(`${props.openTimeLine}-${index}`)}
-                      className="flex "
+                      className="flex ml-2 md:ml-0"
                     >
                       {" "}
+                      <p className="absolute top-2 text-black z-40 text-xs -left-2">
+                        2019
+                      </p>
                       <Image
                         key={index}
                         src={item.src}
-                        height="300"
-                        width="200"
-                        className={` z-30 border-white sm:mr-24 -ml-4 border-4`}
+                        height="295"
+                        width="190"
+                        unoptimized={true}
+                        className={` z-30 border-black sm:mr-24 -ml-4 border md:object-cover md:h-[295px] md:w-[190px]`}
                         alt="TestImage"
                       ></Image>
                     </motion.div>
@@ -184,7 +192,7 @@ export default function AltMainCenter(props: AltMainCenterProps) {
             variants={variants}
             key={String(props.openTimeLine)}
             transition={{ duration: 0.6 }}
-            className="text-gray-800 xl:text-[200px] text-[100px] font-PlayFair font-bold absolute "
+            className="text-black xl:text-[200px] lg:text-[130px] text-[80px] font-PlayFair font-bold absolute "
           >
             {!props.openTimeLine && (
               <>

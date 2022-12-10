@@ -9,7 +9,7 @@ type AltMainPageProps = {
   other?: boolean;
 };
 
-export default function AltMainPage(props: AltMainPageProps) {
+export default function AltMainPage() {
   const [openTimeLine, setOpenTimeLine] = useState(true);
   const borderSol = [1, 2, 3, 4, 5, 6];
   return (
@@ -19,7 +19,7 @@ export default function AltMainPage(props: AltMainPageProps) {
           onClick={() => {
             setOpenTimeLine((prev) => !prev);
           }}
-          className="absolute text-sm -right-1 top-14 p-2 z-40 border border-black"
+          className="absolute text-sm font-PlayFair hover:border-white duration-300 -right-1 top-14 p-2 z-40 border border-black"
         >
           Time Line
         </button>

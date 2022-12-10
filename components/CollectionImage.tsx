@@ -60,13 +60,13 @@ export default function CollectionImage(props: CollectionImageProps) {
 
   return (
     <div
-      className={`relative flex flex-col items-center jusify-center ${
-        vertical ? "lg:p-8 p-2" : "p-2"
+      className={`relative flex flex-col items-center jusify-center group ${
+        vertical ? "lg:m-8 m-2" : "p-2"
       } ${
         props.version === "Jewerly" && "hidden"
       } hover:scale-105 duration-300 z-50`}
     >
-      <div className="absolute -bottom-4 text-red-500 font-SecFont md:text-2xl">
+      <div className="absolute -bottom-10 md:hidden text-red-500 z-50 font-SecFont md:text-2xl">
         {props.version === "Risque" ? "NightLife" : props.version}
       </div>
       <div className="">
@@ -81,21 +81,27 @@ export default function CollectionImage(props: CollectionImageProps) {
           Vert
         </div>
         <Image
-          width={200}
-          height={200}
+          width={300}
+          height={400}
           unoptimized={true}
-          className={`${
-            props.version === "Jewerly" && "rotate-90"
-          } object-cover ${
+          className={` object-cover  ${
             vertical
-              ? "lg:h-[400px] lg:w-[300px] h-[200px] w-[150px]"
+              ? "lg:h-[397px] lg:w-[300px] md:h-[267px] md:w-[200px] h-[200px] w-[147px] shadow-lg"
               : "h-[200px] w-[200px]"
-          } border-y-2 ${
-            !props.other ? "border-white" : "border-black border"
-          } ${props.version === "Formal" ? "border-x-2" : "border-x-2"}`}
+          }  ${!props.other ? "border-white" : "border-black border"} ${
+            props.version === "Formal" ? "border" : "border"
+          } `}
           alt="Collection Image"
           src={props.img.src}
         ></Image>
+      </div>
+      <div className="h-1/4 w-full absolute bg-red-500 font-Poppins hidden md:block bottom-0 flex flex-col text-black text-xs text-right p-2">
+        trademark ®VERT 2017
+        <div>styled by giancoo caldi</div>
+        <div>model: alex corr</div>
+        <div className="absolute left-2 text-black z-50 top-1 lg:top-2 font-SecFont md:text-base lg:text-2xl">
+          {props.version === "Risque" ? "NightLife" : props.version}
+        </div>
       </div>
     </div>
   );

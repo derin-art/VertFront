@@ -3,7 +3,7 @@ import { useState } from "react";
 import useMediaQuery from "../../hooks/useMediaQuery";
 
 export default function NewXpage() {
-  const [isAnimationComplete, setAnimationIsComplete] = useState(false);
+  const [isAnimationComplete, setAnimationIsComplete] = useState(true);
 
   const { height, width } = useMediaQuery();
 
@@ -82,44 +82,49 @@ export default function NewXpage() {
         transition={{ duration: 0.3 }}
         viewport={{ once: false }}
         className={`${
-          isAnimationComplete ? "text-white" : "text-black "
-        } absolute xl:text-3xl hidden sm:block text-3xl flex flex-col z-30 group duration-300 mt-10 md:ml-0 ml-20  font-PlayI items-center justify-center`}
+          isAnimationComplete
+            ? "text-white border-white"
+            : "text-black border-black"
+        } absolute xl:text-2xl hidden sm:block text-3xl border p-2  flex flex-col z-30 group duration-300 mt-10 md:ml-0 ml-20  font-Poppins items-center justify-center`}
       >
-        <div className="text-7xl group-hover:text-white duration-300">‸</div>
         <span className="group-hover:text-red-500 duration-300">
           Explore our christmas collection
         </span>
       </motion.button>
 
       <div
-        className={`w-1/2 border-r duration-300 h-full ${
+        className={`w-1/2 border-r sm:border-none duration-300 h-full ${
           isAnimationComplete ? "border-white" : "border-black"
         } relative flex overflow-hidden items-center justify-center`}
       >
         <motion.div
           initial={{
             left: textDisplacementToBePassedToElement.left.initial,
+            scale: 1.5,
           }}
           whileInView={{
             left: textDisplacementToBePassedToElement.left.final,
+            scale: 1,
           }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: false }}
-          className="absolute text-7xl md:text-8xl xl:text-9xl font-SecFont sm:mt-0 mt-48"
+          className="absolute text-7xl md:text-8xl xl:text-9xl font-Abril sm:mt-0 mt-48"
         >
           Christmas
         </motion.div>
       </div>
       <div
-        className={`w-1/2  h-full border-black relative font-SecFont flex items-center justify-center md:rotate-90`}
+        className={`w-1/2  h-full border-black relative font-Abril flex items-center justify-center md:rotate-90`}
       >
         <motion.div
           initial={{
             opacity: 0,
+            scale: 1.5,
             right: textDisplacementToBePassedToElement.right.initial,
           }}
           whileInView={{
             opacity: 1,
+            scale: 1,
             right: textDisplacementToBePassedToElement.right.final,
           }}
           transition={{ duration: 0.8 }}

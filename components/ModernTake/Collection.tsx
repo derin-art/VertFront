@@ -53,7 +53,7 @@ export default function Collection() {
           <motion.span
             className={`font-PlayI  ${other ? "text-AltBlack" : "text-white"}`}
           >
-            Popular
+            Timeless
           </motion.span>{" "}
           Collections
         </motion.div>

@@ -18,6 +18,7 @@ module.exports = {
         IMFELL: ["IMFELL", "serif"],
         Oswald: ["Oswald", "serif"],
         Grad: ["Grad", "serif"],
+        Abril: ["Abril", "serif"],
       },
       colors: {
         MikYellow: "#FEC601",

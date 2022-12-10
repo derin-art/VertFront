@@ -86,6 +86,11 @@ a {
   src: url("../public/font/Graduate/Graduate-Regular.ttf");
 }
 
+@font-face {
+  font-family: Abril;
+  src: url("../public/font/Abril_Fatface/AbrilFatface-Regular.ttf");
+}
+
 .snapCont {
   scroll-snap-type: y mandatory;
 }
@@ -100,11 +105,9 @@ a {
 
 .linesB {
   min-height: 100%;
-  background: linear-gradient(black 0 0) calc(1 * 100% / 6),
-    linear-gradient(black 0 0) calc(2 * 100% / 6),
-    linear-gradient(black 0 0) calc(3 * 100% / 6),
-    linear-gradient(black 0 0) calc(4 * 100% / 6),
-    linear-gradient(black 0 0) calc(5 * 100% / 6);
+  background: linear-gradient(black 0 0) calc(1 * 100% / 4),
+    linear-gradient(black 0 0) calc(2 * 100% / 4),
+    linear-gradient(black 0 0) calc(3 * 100% / 4);
 
   background-size: 1px 100%; /* Control the width here*/
   background-repeat: no-repeat;
