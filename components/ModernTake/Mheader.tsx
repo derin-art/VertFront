@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 
 export default function Mheader() {
   const Links = ["home", "collection"];
+  const otherLinks = ["SHIRTS", "JACKETS", "T-SHIRTS"];
   return (
     <div className="w-full font-Poppins text-xs fixed flex items-center z-50 bg-AltBlack text-white border-y border-white">
       <div className="">
@@ -45,6 +46,20 @@ export default function Mheader() {
           {" "}
           Vert
         </motion.p>
+      </div>
+      <div className="absolute h-screen hidden backdrop-blur-sm w-full top-16 flex flex-col items-center bg-white bg-opacity-25 ">
+        <div className="mt-20 text-center ">
+          {otherLinks.map((item) => {
+            return (
+              <div
+                key={item}
+                className="text-8xl text-red-500 blur-none font-Berk border-b-2 border-black w-screen mb-8 "
+              >
+                {item}!
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

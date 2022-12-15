@@ -64,7 +64,7 @@ export default function CollectionImage(props: CollectionImageProps) {
         vertical ? "lg:m-8 m-2" : "p-2"
       } ${
         props.version === "Jewerly" && "hidden"
-      } hover:scale-105 duration-300 z-50`}
+      } hover:scale-105 duration-300 z-40`}
     >
       <div className="absolute -bottom-10 md:hidden text-red-500 z-50 font-SecFont md:text-2xl">
         {props.version === "Risque" ? "NightLife" : props.version}
