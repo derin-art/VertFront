@@ -8,15 +8,38 @@ import Test3 from "../../public/TestImages/Test3.jpg";
 import L1 from "../../public/TestImages/L1.jpg";
 import B1 from "../../public/TestImages/B44.png";
 import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/useDispatch";
+import { changeCollectionBool } from "../../Features/collectionAnimSlice";
 
 export default function Collection() {
   const [other, setOther] = useState(false);
   const [other2, setOther2] = useState(false);
+  const collectionBool = useAppSelector((state) => state.collection.value);
+  console.log("ezio", collectionBool);
+  const dispatch = useAppDispatch();
   const ThisIs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
   const images = [
-    { name: "Casual", img: Test2 },
-    { name: "Risque", img: L1 },
-    { name: "Formal", img: V2 },
+    {
+      name: "Casual",
+      img: Test2,
+      date: "2019",
+      by: "lee yeon",
+      model: "alex corr",
+    },
+    {
+      name: "Risque",
+      img: L1,
+      date: "2016",
+      by: "yemi olawale",
+      model: "just greenland",
+    },
+    {
+      name: "Formal",
+      img: V2,
+      date: "2017",
+      by: "giancoo galdi",
+      model: "micheal masz",
+    },
 
     { name: "Jewerly", img: B1 },
   ];
@@ -33,7 +56,7 @@ export default function Collection() {
   return (
     <div
       className={`h-screen ${
-        other ? "bg-white" : "bg-black"
+        collectionBool ? "bg-white" : "bg-black"
       } relative flex overflow-x-hidden duration-300 items-end snapChild justify-start border-b border-black`}
     >
       <div className="flex font-SecFont w-full text-[80px] lg:text-[120px]  xl:text-[150px] absolute  self-start mt-14 text-red-500">
@@ -51,7 +74,9 @@ export default function Collection() {
           className="absolute -right-[300px]"
         >
           <motion.span
-            className={`font-PlayI  ${other ? "text-AltBlack" : "text-white"}`}
+            className={`font-PlayI  ${
+              collectionBool ? "text-AltBlack" : "text-white"
+            }`}
           >
             Timeless
           </motion.span>{" "}
@@ -99,7 +124,8 @@ export default function Collection() {
           skewX: 0,
         }}
         onAnimationComplete={() => {
-          setOther((prev) => !prev);
+          /*   setOther((prev) => !prev); */
+          dispatch(changeCollectionBool());
         }}
         transition={{ duration: 0.6, delay: 0.4 }}
         viewport={{ once: false }}
@@ -110,6 +136,9 @@ export default function Collection() {
             return (
               <div className="mb-6" key={index}>
                 <CollectionImage
+                  by={item.by}
+                  date={item.date}
+                  model={item.model}
                   width={150}
                   height={500}
                   img={item.img}

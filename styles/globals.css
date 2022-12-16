@@ -111,6 +111,7 @@ a {
 
   background-size: 1px 100%; /* Control the width here*/
   background-repeat: no-repeat;
+  background-color: white;
 }
 
 .linesW {

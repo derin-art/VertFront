@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Center1 from "../public/TestImages/Center1.jpg";
+import TimeLineIcon from "../public/icons/timeLineIcon";
 import AltMainCenter from "./AltMainCenter";
 import { useState } from "react";
 import { type } from "os";
@@ -13,15 +14,16 @@ export default function AltMainPage() {
   const [openTimeLine, setOpenTimeLine] = useState(true);
   const borderSol = [1, 2, 3, 4, 5, 6];
   return (
-    <div className={` h-screen bg-white p-4 pt-8 font-Poppins linesB`}>
+    <div className={`h-screen bg-white p-4 pt-8 font-Poppins  linesB`}>
       <div className="text-[#0A090C] flex relative ">
         <button
           onClick={() => {
             setOpenTimeLine((prev) => !prev);
           }}
-          className="absolute text-sm font-PlayFair hover:border-white duration-300 -right-1 top-14 p-2 z-40 border border-black"
+          className="absolute font-Poppins flex items-center justify-center text-xs hover:border-white duration-300 -right-1 top-14 p-2 z-40 border-black"
         >
-          Time Line
+          TimeLine
+          {TimeLineIcon()}
         </button>
       </div>
 

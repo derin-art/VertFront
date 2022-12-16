@@ -7,7 +7,7 @@ export default function Varsity() {
   const allText = [{ text: "V" }, { text: "FOR" }, { text: "VARSITY" }];
   const [isMouseOverExplore, setMouseIsOverExplore] = useState(false);
   return (
-    <div className="h-screen flex snapChild items-center justify-center">
+    <div className="h-screen bg-white flex snapChild items-center justify-center">
       <button
         onMouseOver={() => {
           setMouseIsOverExplore((prev) => true);
@@ -15,7 +15,7 @@ export default function Varsity() {
         onMouseLeave={() => {
           setMouseIsOverExplore((prev) => false);
         }}
-        className="absolute mt-48 font-Grad border border-black p-2"
+        className="absolute mt-48 font-Grad border text-black border-black p-2 z-20"
       >
         Explore our Varsity Offering
       </button>

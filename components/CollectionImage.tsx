@@ -8,6 +8,9 @@ type CollectionImageProps = {
   word?: string;
   version?: string;
   other?: boolean;
+  by?: string;
+  model?: string;
+  date?: string;
 };
 
 export default function CollectionImage(props: CollectionImageProps) {
@@ -60,12 +63,15 @@ export default function CollectionImage(props: CollectionImageProps) {
 
   return (
     <div
-      className={`relative flex flex-col items-center jusify-center group ${
+      className={`relative flex flex-col items-center justify-center group ${
         vertical ? "lg:m-8 m-2" : "p-2"
       } ${
         props.version === "Jewerly" && "hidden"
-      } hover:scale-105 duration-300 z-40`}
+      } hover:scale-105 duration-300 z-20`}
     >
+      <div className="absolute hidden font-SecFont border border-red-500 p-2 text-red-500">
+        Explore
+      </div>
       <div className="absolute -bottom-10 md:hidden text-red-500 z-50 font-SecFont md:text-2xl">
         {props.version === "Risque" ? "NightLife" : props.version}
       </div>
@@ -96,9 +102,9 @@ export default function CollectionImage(props: CollectionImageProps) {
         ></Image>
       </div>
       <div className="h-1/4 w-full absolute bg-red-500 font-Poppins hidden md:block bottom-0 flex flex-col text-black text-xs text-right p-2">
-        trademark ®VERT 2017
-        <div>styled by giancoo caldi</div>
-        <div>model: alex corr</div>
+        trademark ®VERT {props.date}
+        <div>styled by {props.by}</div>
+        <div>model: {props.model}</div>
         <div className="absolute left-2 text-black z-50 top-1 lg:top-2 font-SecFont md:text-base lg:text-2xl">
           {props.version === "Risque" ? "NightLife" : props.version}
         </div>
