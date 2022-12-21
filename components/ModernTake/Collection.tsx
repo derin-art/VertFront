@@ -10,7 +10,10 @@ import L1 from "../../public/TestImages/L1.jpg";
 import B1 from "../../public/TestImages/B44.png";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/useDispatch";
-import { changeCollectionBool } from "../../Features/collectionAnimSlice";
+import {
+  changeCollectionBool,
+  changeCollectionBooltoFalse,
+} from "../../Features/collectionAnimSlice";
 
 export default function Collection() {
   const [other, setOther] = useState(false);
@@ -98,22 +101,6 @@ export default function Collection() {
         >
           Collections
         </motion.div>
-      </div>
-      <div className="w-full absolute hidden top-[60px] border-b font-SecFont text-xl border-black flex justify-center">
-        <p className="marquee border-b border-black">
-          <span>
-            {ThisIs.map((item) => {
-              return "This is Vert -";
-            })}
-          </span>
-        </p>
-        <p className="marquee marquee2">
-          <span>
-            {ThisIs.map((item) => {
-              return "This is Vert -";
-            })}
-          </span>
-        </p>
       </div>
 
       <motion.div

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Var from "../../public/TestImages/VAR2.png";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import { useState } from "react";
@@ -8,7 +9,8 @@ export default function Varsity() {
   const [isMouseOverExplore, setMouseIsOverExplore] = useState(false);
   return (
     <div className="h-screen bg-white flex snapChild items-center justify-center">
-      <button
+      <Link
+        href={"/Varsity"}
         onMouseOver={() => {
           setMouseIsOverExplore((prev) => true);
         }}
@@ -18,7 +20,7 @@ export default function Varsity() {
         className="absolute mt-48 font-Grad border text-black border-black p-2 z-20"
       >
         Explore our Varsity Offering
-      </button>
+      </Link>
       <div
         className={`absolute xl:text-9xl lg:text-7xl duration-300 text-4xl font-SecFont ${
           isMouseOverExplore ? "text-red-500" : "text-black"

@@ -2,11 +2,15 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
 interface CartState {
-  value: number;
+  value: {
+    itemsNo: number;
+  };
 }
 
 const initialState: CartState = {
-  value: 0,
+  value: {
+    itemsNo: 0,
+  },
 };
 
 export const cartSlice = createSlice({
@@ -14,13 +18,13 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     increment: (state) => {
-      state.value += 1;
+      state.value.itemsNo += 1;
     },
     decrement: (state) => {
-      state.value -= 1;
+      state.value.itemsNo -= 1;
     },
     addMultiple: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
+      state.value.itemsNo += action.payload;
     },
   },
 });

@@ -1,5 +1,4 @@
 import axios from "axios";
-import Back from "../public/TestImages/Back.jpg";
 import ItemLinks from "../components/PagesComponents/ItemLinks";
 
 type ProductProps = {
@@ -25,14 +24,14 @@ type ProductProps = {
   };
 };
 
-export default function Risque(props: ProductProps) {
+export default function Casual(props: ProductProps) {
   return (
-    <div className="md:h-screen h-fit w-full bg-[url('../public/TestImages/Back.jpg')] flex items-center justify-center">
+    <div className="flex items-center justify-around bg-[url('../public/TestImages/AmberBack.jpg')] h-fit md:h-screen w-screen">
       <div className="w-4/5 h-4/5 space-y-4 md:space-y-0 flex items-center py-20 md:py-0 justify-around bg-white relative md:flex-row flex-col">
-        <div className="absolute top-2 left-2 text-3xl font-SecFont hidden md:block">
-          NightLife
+        <div className="absolute top-2 left-2 text-3xl font-SecFont md:block hidden">
+          Casual
         </div>
-        {props.allItems.data.map((item) => {
+        {props.allItems.data.map((item, index) => {
           return <ItemLinks data={item} key={item._id}></ItemLinks>;
         })}
       </div>
@@ -43,7 +42,7 @@ export default function Risque(props: ProductProps) {
 export async function getServerSideProps(context: any) {
   const data: any = await axios
     .get(
-      `http://${process.env.NEXT_PUBLIC_SERVER_HOST}//api/getStoreItems?collection=NightLife`
+      `http://${process.env.NEXT_PUBLIC_SERVER_HOST}//api/getStoreItems?collection=Casual`
     )
     .catch((err) => {
       console.log(err);

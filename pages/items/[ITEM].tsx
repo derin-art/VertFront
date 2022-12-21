@@ -28,24 +28,49 @@ type ProductProps = {
 
 export default function Shirts(props: ProductProps) {
   const finalArray = [];
+  const finalArrayMobile = [];
   const chunkSize = 3;
+  const chunkSizeMobile = 2;
   for (let i = 0; i < props.allItems.data.length; i += chunkSize) {
     const chunk = props.allItems.data.slice(i, i + chunkSize);
-    // do whatever
+
     finalArray.push(chunk);
   }
   console.log("sd", finalArray);
+
+  for (let i = 0; i < props.allItems.data.length; i += chunkSizeMobile) {
+    const chunk = props.allItems.data.slice(i, i + chunkSizeMobile);
+
+    finalArrayMobile.push(chunk);
+  }
   return (
     <div className="bg-white">
       {finalArray.map((item, index) => {
         return (
           <div
             key={index}
-            className="flex items-center justify-around h-screen snapChild"
+            className="flex items-center justify-around h-screen hidden md:flex snapChild"
           >
             {item.map((product) => {
               return (
-                <div key={product._id}>
+                <div className=" z-10 " key={product._id}>
+                  <ItemLinks key={product._id} data={product}></ItemLinks>
+                </div>
+              );
+            })}
+          </div>
+        );
+      })}
+
+      {finalArrayMobile.map((item, index) => {
+        return (
+          <div
+            key={index}
+            className="flex items-center justify-around h-screen md:hidden flex snapChild"
+          >
+            {item.map((product) => {
+              return (
+                <div className=" z-10 " key={product._id}>
                   <ItemLinks key={product._id} data={product}></ItemLinks>
                 </div>
               );

@@ -16,10 +16,14 @@ export const collectionSlice = createSlice({
     changeCollectionBool: (state) => {
       state.value = !state.value;
     },
+    changeCollectionBooltoFalse: (state) => {
+      state.value = false;
+    },
   },
 });
 
-export const { changeCollectionBool } = collectionSlice.actions;
+export const { changeCollectionBool, changeCollectionBooltoFalse } =
+  collectionSlice.actions;
 
 export const collectionSelector = (state: RootState) => state.collection.value;
 export default collectionSlice.reducer;

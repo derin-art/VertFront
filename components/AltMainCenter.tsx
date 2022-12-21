@@ -88,8 +88,8 @@ export default function AltMainCenter(props: AltMainCenterProps) {
           >
             {props.openTimeLine && (
               <>
-                <div className="absolute z-40 text-black font-Poppins bottom-2 left-2 text-xs">
-                  2022 collection
+                <div className="absolute z-30 text-black font-Poppins bottom-2 right-2 text-xs">
+                  Vert
                 </div>
 
                 <Image
@@ -161,7 +161,7 @@ export default function AltMainCenter(props: AltMainCenterProps) {
             transition={{ duration: 0.6 }}
             className={`${
               !props.other ? "text-AltBlack" : "text-white"
-            } z-30 lg:text-[250px] md:text-[200px] text-[100px] rotate-90 font-IMFELL font-bold absolute`}
+            } z-20 lg:text-[250px] md:text-[200px] text-[100px] rotate-90 font-PlayI font-bold absolute`}
           >
             {props.openTimeLine ? (
               <>
