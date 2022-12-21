@@ -1,10 +1,14 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { useRouter } from "next/router";
 import useFramerAnimation from "../../hooks/useFramerAnimation";
 import { useAppSelector } from "../../hooks/useDispatch";
 import { changeCollectionBool } from "../../Features/collectionAnimSlice";
+import Link from "next/link";
 
 export default function Mheader() {
+  const router = useRouter();
+  const { ITEM } = router.query;
   const Links = ["home", "items"];
   const otherLinks = ["SHIRTS", "JACKETS", "T-SHIRTS"];
   const collectionBool = useAppSelector((state) => state.collection.value);
@@ -18,29 +22,71 @@ export default function Mheader() {
     >
       <div className="flex">
         {Links.map((item, index) => {
-          return (
-            <motion.button
-              initial={{
-                opacity: 0,
-                skewX: "20deg",
-              }}
-              whileInView={{
-                opacity: 1,
-                skewX: "0deg",
-              }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: false }}
-              key={item}
-              onClick={() => {
-                if (item === "items") {
-                  setCollectionOpen((prev) => !prev);
-                }
-              }}
-              className={`mr-8 border-black h-full z-50   p-6 hover:text-red-500 duration-300`}
-            >
-              {item}
-            </motion.button>
-          );
+          if (item === "items") {
+            return (
+              <motion.button
+                initial={{
+                  opacity: 0,
+                  skewX: "20deg",
+                }}
+                whileInView={{
+                  opacity: 1,
+                  skewX: "0deg",
+                }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: false }}
+                key={item}
+                onClick={() => {
+                  if (item === "items") {
+                    setCollectionOpen((prev) => !prev);
+                  } else {
+                    setCollectionOpen(false);
+                  }
+                }}
+                className={`mr-8 border-black h-full z-50 p-6    hover:text-red-500 duration-300`}
+              >
+                {item === "items" ? (
+                  item
+                ) : (
+                  <Link className="border " href={"/"}>
+                    {item}
+                  </Link>
+                )}
+              </motion.button>
+            );
+          } else {
+            return (
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  skewX: "20deg",
+                }}
+                whileInView={{
+                  opacity: 1,
+                  skewX: "0deg",
+                }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: false }}
+                key={item}
+                onClick={() => {
+                  if (item === "items") {
+                    setCollectionOpen((prev) => !prev);
+                  } else {
+                    setCollectionOpen(false);
+                  }
+                }}
+                className={`mr-8 border-black h-full z-50   p-6 hover:text-red-500 duration-300`}
+              >
+                {item === "items" ? (
+                  item
+                ) : (
+                  <Link className=" p-6" href={"/"}>
+                    {item}
+                  </Link>
+                )}
+              </motion.div>
+            );
+          }
         })}
       </div>
       <div className=" font-SecFont flex items-center justify-center absolute right-4 border-black text-4xl line-through h-full">
@@ -58,7 +104,7 @@ export default function Mheader() {
           className="pl-2 z-50"
         >
           {" "}
-          Vert
+          {ITEM ? <span className="text-red-500">{ITEM}</span> : ""} Vert
         </motion.p>
       </div>
       <motion.div
@@ -67,7 +113,7 @@ export default function Mheader() {
         }}
         animate={collectionOpen ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 0.56 }}
-        className={`w-full h-screen fixed top-0 backdrop-blur-sm border ${
+        className={`w-full h-screen fixed top-0 backdrop-blur-sm ${
           collectionOpen ? "z-40" : "z-[0]"
         }`}
       >
@@ -86,7 +132,14 @@ export default function Mheader() {
                     key={item}
                     className="lg:text-7xl xl:text-8xl text-3xl text-red-500 blur-none font-Berk  border-black w-screen mb-8 "
                   >
-                    {item}!
+                    <Link
+                      onClick={() => {
+                        setCollectionOpen((prev) => !prev);
+                      }}
+                      href={`/items/${item}`}
+                    >
+                      {item}!
+                    </Link>
                   </motion.div>
                 );
               })}

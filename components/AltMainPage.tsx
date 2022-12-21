@@ -20,10 +20,9 @@ export default function AltMainPage() {
           onClick={() => {
             setOpenTimeLine((prev) => !prev);
           }}
-          className="absolute font-Poppins flex items-center justify-center text-xs hover:border-white duration-300 -right-1 top-14 p-2 z-40 border-black"
+          className="absolute font-Poppins border border-black flex items-center justify-center text-xs hover:border-white duration-300 -right-1 top-14 p-2 z-40 border-black"
         >
           TimeLine
-          {TimeLineIcon()}
         </button>
       </div>
 

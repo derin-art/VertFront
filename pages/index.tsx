@@ -4,15 +4,12 @@ import AltPage from "../components/AltPage";
 import styles from "../styles/Home.module.css";
 import MainPageTest from "../components/MainPageTest";
 import Star from "../public/icons/star";
+
 import AltMainPage from "../components/AltMainPage";
 import CopyIcon from "../public/icons/copyIcon";
-import XPage from "../components/XPage";
-import B1 from "../public/TestImages/B2.jpg";
-import B2 from "../public/TestImages/B2.webp";
-import B4 from "../public/TestImages/B444.png";
+
 import { motion } from "framer-motion";
-import MMainPage from "../components/ModernTake/MMainPage";
-import NewXpage from "../components/ModernTake/NewXpage";
+
 import Collection from "../components/ModernTake/Collection";
 import AnotherMain from "../components/ModernTake/AnotherMain";
 import { useState } from "react";
@@ -65,7 +62,7 @@ export default function Home() {
       <Varsity></Varsity>
       <div className="h-screen bg-white flex items-center justify-center snapChild">
         <div className="w-10/12  h-3/4 hidden md:block relative flex justify-end text-right p-8">
-          <div className=" w-fit font-Berk absolute left-4 lg:text-[150px] md:text-[100px] text-[100px] xl:text-[200px] text-gray-200">
+          <div className=" w-fit font-Berk absolute left-4 lg:text-[150px] md:text-[100px] text-[100px] xl:text-[250px] text-gray-200">
             Ve <span className="-ml-6 text-black">®</span>t
           </div>
         </div>
@@ -90,7 +87,3 @@ export default function Home() {
     </div>
   );
 }
-
-/*  <AltMainPage other={other}></AltMainPage> */
-
-/*  <NewXpage></NewXpage> */

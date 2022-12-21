@@ -1,4 +1,5 @@
 import { animate, AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
 import CollectionImage from "../CollectionImage";
 import Test2 from "../../public/TestImages/Test2.jpg";
 import V1 from "../../public/TestImages/V1.jpg";
@@ -134,7 +135,7 @@ export default function Collection() {
         <motion.div className="lg:mt-[123px] mt-[74px] flex  sm:flex-row">
           {images.map((item, index) => {
             return (
-              <div className="mb-6" key={index}>
+              <Link href={`/${item.name}`} className="mb-6" key={index}>
                 <CollectionImage
                   by={item.by}
                   date={item.date}
@@ -147,7 +148,7 @@ export default function Collection() {
                   version={item.name}
                   other={other}
                 ></CollectionImage>
-              </div>
+              </Link>
             );
           })}
         </motion.div>

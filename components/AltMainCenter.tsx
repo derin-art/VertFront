@@ -61,7 +61,7 @@ export default function AltMainCenter(props: AltMainCenterProps) {
     },
     in: {
       opacity: 1,
-      x: 10,
+      x: 0,
       transition: {
         duration: 0.55,
         delay: 0.3,
@@ -91,15 +91,13 @@ export default function AltMainCenter(props: AltMainCenterProps) {
                 <div className="absolute z-40 text-black font-Poppins bottom-2 left-2 text-xs">
                   2022 collection
                 </div>
-                <div className="absolute z-40 text-red-500 font-PlayI top-2 left-2">
-                  VERT
-                </div>
+
                 <Image
                   src={Center1.src}
                   height="400"
                   width="300"
                   unoptimized={true}
-                  className={` z-40 border-black border-2 duration-300`}
+                  className={` z-40 border-black  duration-300`}
                   alt="TestImage"
                 ></Image>
               </>
@@ -110,7 +108,7 @@ export default function AltMainCenter(props: AltMainCenterProps) {
         {/* Rendering images on TimeLine Open prop */}
         <AnimatePresence>
           <div className="relative flex ">
-            <div className="flex z-50  items-center justify-center -mr-2">
+            <div className="flex z-50  items-center justify-center md:-mr-2 space-x-2">
               {!props.openTimeLine &&
                 collectionsStand.map((item, index) => {
                   return (
@@ -123,19 +121,17 @@ export default function AltMainCenter(props: AltMainCenterProps) {
                       }}
                       variants={imageVariants}
                       key={String(`${props.openTimeLine}-${index}`)}
-                      className="flex ml-2 md:ml-0"
+                      className=" "
                     >
                       {" "}
-                      <p className="absolute top-2 text-black z-40 text-xs -left-2">
-                        2019
-                      </p>
+                      <p className="absolute bottom-2 text-black ">2019</p>
                       <Image
                         key={index}
                         src={item.src}
                         height="295"
                         width="190"
                         unoptimized={true}
-                        className={` z-30 border-black sm:mr-24 -ml-4 border md:object-cover md:h-[295px] md:w-[190px]`}
+                        className={` z-30 border-black sm:mr-24 md:-ml-4 border w-[150px] md:object-cover md:h-[295px] md:w-[190px]`}
                         alt="TestImage"
                       ></Image>
                     </motion.div>
