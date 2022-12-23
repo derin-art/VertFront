@@ -8,7 +8,7 @@ export default function Varsity() {
   const allText = [{ text: "V" }, { text: "FOR" }, { text: "VARSITY" }];
   const [isMouseOverExplore, setMouseIsOverExplore] = useState(false);
   return (
-    <div className="h-screen bg-white flex snapChild items-center justify-center">
+    <div className="h-screen bg-white flex snapChild items-center justify-center border-b border-black">
       <Link
         href={"/Varsity"}
         onMouseOver={() => {

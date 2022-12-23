@@ -1,4 +1,11 @@
 import axios from "axios";
+import { useAppDispatch, useAppSelector } from "../../hooks/useDispatch";
+import {
+  increment,
+  decrement,
+  addToCart,
+  removeFromCart,
+} from "../../Features/cartSlice";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 type ProductProps = {
@@ -23,7 +30,20 @@ type ProductProps = {
 };
 
 export default function Product(props: ProductProps) {
-  const cartButtons = [{ name: "Add to Cart" }, { name: "Remove from Cart" }];
+  const dispatch = useAppDispatch();
+  console.log(useAppSelector((state) => state.cart.value));
+  const cartButtons = [
+    {
+      name: "Add to Cart",
+      sign: "+",
+      func: () => dispatch(addToCart(props.data)),
+    },
+    {
+      name: "Remove from Cart",
+      sign: "-",
+      func: () => dispatch(removeFromCart(props.data._id)),
+    },
+  ];
   return (
     <div className="w-screen h-screen flex items-center justify-center z-30">
       <div className="w-4/5 h-4/5  flex items-center justify-center">
@@ -40,14 +60,24 @@ export default function Product(props: ProductProps) {
             ${props.data.price}
           </div>
           <div className="font-Poppins mt-4">{props.data.Description}</div>
-          <div className="flex justify-between mt-4">
+          <div className="flex  mt-4">
             {cartButtons.map((item) => {
               return (
-                <button className="border p-2 border-black z-30 font-Poppins text-sm">
-                  {item.name}
+                <button
+                  onClick={() => {
+                    item.func();
+                  }}
+                  className="border p-2 mr-2 hover:bg-black bg-white hover:text-white duration-300 border-black z-30 font-Poppins text-xs"
+                >
+                  <span className="text-red-500">{item.sign}</span> {item.name}
                 </button>
               );
             })}
+          </div>
+          <div className="mt-3">
+            <button className="border border-black p-2 font-Poppins text-xs">
+              Add to WishList
+            </button>
           </div>
         </div>
       </div>

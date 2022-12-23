@@ -62,8 +62,8 @@ export default function Home() {
       <Varsity></Varsity>
       <div className="h-screen bg-white flex items-center justify-center snapChild">
         <div className="w-10/12  h-3/4 hidden md:block relative flex justify-end text-right p-8">
-          <div className=" w-fit font-Berk absolute left-4 lg:text-[150px] md:text-[100px] text-[100px] xl:text-[250px] text-gray-200">
-            Ve <span className="-ml-6 text-black">®</span>t
+          <div className=" w-fit font-Berk absolute left-4 line-through lg:text-[150px] md:text-[100px] text-[100px] xl:text-[250px] text-gray-200">
+            VERT
           </div>
         </div>
         <div className="absolute text-gray-200 text-6xl rotate-90 left-0 font-Poppins md:hidden">

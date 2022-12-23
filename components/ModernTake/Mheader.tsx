@@ -16,6 +16,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  signOut,
 } from "../../pages/api/firebase";
 import useFramerAnimation from "../../hooks/useFramerAnimation";
 import { useAppSelector, useAppDispatch } from "../../hooks/useDispatch";
@@ -35,7 +36,7 @@ export default function Mheader() {
   const otherLinks = ["SHIRTS", "JACKETS", "T-SHIRTS"];
   const [openLogin, setOpenLogin] = useState(false);
   const collectionBool = useAppSelector((state) => state.collection.value);
-  const cartVal = useAppSelector((state) => state.cart.value);
+  const cartVal = useAppSelector((state) => state.cart.value.cartItems);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [collectionOpen, setCollectionOpen] = useState(false);
 
@@ -98,6 +99,7 @@ export default function Mheader() {
       });
       return;
     }
+    notify(toastId, "Signing In");
     await signInWithEmailAndPassword(
       auth,
       loginDetails.Email,
@@ -115,14 +117,28 @@ export default function Mheader() {
             uid: userAuth.user.uid,
           })
         );
-        toast.success("Login Successful", {
-          ...toastOptions(),
-          autoClose: 3000,
-        });
+        update(toastId, "Login Successful");
         setOpenLogin((prev) => !prev);
+        setIsUserMenuOpen(false);
       })
       .catch((err) => {
+        switch (err.code) {
+          case "auth/user-not-found":
+            ifErrorUpdate(toastId, "User Not found");
+            break;
+          case "auth/wrong-password":
+            ifErrorUpdate(toastId, "Wrong Password");
+            break;
+          case "auth/invalid-email":
+            ifErrorUpdate(toastId, "Invalid Email");
+            break;
+
+          default:
+            ifErrorUpdate(toastId, "Bad Connection");
+            break;
+        }
         console.log(err);
+        return;
       });
   };
 
@@ -155,7 +171,7 @@ export default function Mheader() {
       });
       return;
     }
-
+    notify(toastId, "Creating User");
     await createUserWithEmailAndPassword(
       auth,
       signUpDetails.Email,
@@ -167,6 +183,10 @@ export default function Mheader() {
           { name: signUpDetails.Name, email: userAuth.user.email }
         )
         .catch((err) => {
+          ifErrorUpdate(
+            toastId,
+            "An error occured, please check your internet"
+          );
           return;
         });
       dispatch(
@@ -175,7 +195,9 @@ export default function Mheader() {
           uid: userAuth.user.uid,
         })
       );
-      toast.success("User Created", { ...toastOptions(), autoClose: 3000 });
+      setOpenLogin((prev) => !prev);
+      setIsUserMenuOpen(false);
+      update(toastId, "User created and logged in");
     });
   };
 
@@ -283,8 +305,10 @@ export default function Mheader() {
               {isUserMenuOpen && (
                 <div className="absolute border border-red-500 mt-8 text-xs w-20 shadow-md flex flex-col bg-white text-black">
                   <button
-                    onClick={() => {
-                      dispatch(logout());
+                    onClick={async () => {
+                      return await signOut(auth).then(() => {
+                        dispatch(logout());
+                      });
                     }}
                     className="p-2 border-b border-red-500 hover:text-red-500 duration-300"
                   >
@@ -309,12 +333,12 @@ export default function Mheader() {
               </button>
             </div>
           )}
-          <div className="relative mr-6 ">
+          <Link href={"/Cart"} className="relative mr-6 ">
             <span className="absolute font-Oswald text-sm -right-2 -top-2 h-4 w-4  flex items-center justify-center rounded-full">
-              {cartVal.itemsNo}
+              {cartVal.length}
             </span>
             {CartIcon("fill-red-500", "20", "20")}
-          </div>{" "}
+          </Link>{" "}
           <motion.p
             initial={{
               opacity: 0,
@@ -384,8 +408,10 @@ export default function Mheader() {
         }`}
       >
         <div className="absolute h-screen  w-screen top-0 flex z-40 flex-col items-center justify-center ">
-          <div className="-mt-10 crossBackGround shadow-md w-4/5 h-4/5 md:w-2/5 md:h-3/5 bg-white rounded-3xl flex flex-col items-center justify-center border  blur-none">
-            <div className="absolute text-red-500 font-Oswald top-10">Vert</div>
+          <div className="-mt-10 crossBackGround shadow-md w-4/5 h-4/5 md:w-2/5 md:h-3/5 bg-white border border-red-500 flex flex-col items-center justify-center border  blur-none">
+            <div className="absolute text-red-500 font-Oswald top-10 text-lg">
+              Vert
+            </div>
             {newUser ? (
               <div className="flex flex-col items-center justify-center">
                 {dataForLogin.map((loginDetails) => {
