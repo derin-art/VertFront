@@ -1,16 +1,33 @@
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
+import { useState, useEffect, useRef } from "react";
+import firebaseApp from "../../pages/api/firebase";
+import {
+  update,
+  ifErrorUpdate,
+  notify,
+  toastOptions,
+} from "../../hooks/useToastPopup";
 import CartIcon from "../../public/icons/cartIcon";
 import { useRouter } from "next/router";
+import { login, logout, selectUser } from "../../Features/authSlice";
+import {
+  auth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "../../pages/api/firebase";
 import useFramerAnimation from "../../hooks/useFramerAnimation";
-import { useAppSelector } from "../../hooks/useDispatch";
-import { changeCollectionBool } from "../../Features/collectionAnimSlice";
-import LoginUser from "../../public/icons/loginUser";
-import LoginImg from "../../public/TestImages/LoginImg.jpg";
+import { useAppSelector, useAppDispatch } from "../../hooks/useDispatch";
 import NotLoginUser from "../../public/icons/notLoginUser";
+import LoginUser from "../../public/icons/loginUser";
 import Link from "next/link";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Mheader() {
+  const dispatch = useAppDispatch();
+  const toastId: any = useRef(null);
+
   const router = useRouter();
   const [newUser, setNewUser] = useState(false);
   const { ITEM } = router.query;
@@ -19,7 +36,34 @@ export default function Mheader() {
   const [openLogin, setOpenLogin] = useState(false);
   const collectionBool = useAppSelector((state) => state.collection.value);
   const cartVal = useAppSelector((state) => state.cart.value);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [collectionOpen, setCollectionOpen] = useState(false);
+
+  console.log(
+    "user",
+    useAppSelector((state) => state.user.value)
+  );
+
+  const userLoginState = useAppSelector((state) => state.user.value);
+
+  const loggedIn = userLoginState.email && userLoginState.uid;
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (userAuth) => {
+      if (userAuth) {
+        // user is logged in, send the user's details to redux, store the current user in the state
+        dispatch(
+          login({
+            email: userAuth.email,
+            uid: userAuth.uid,
+          })
+        );
+      } else {
+        dispatch(logout());
+      }
+    });
+  }, []);
+
   const dataForLogin = [{ name: "Email" }, { name: "Password" }];
   const dataForNewUser = [
     { name: "Name" },
@@ -27,12 +71,121 @@ export default function Mheader() {
     { name: "Password" },
     { name: "Verify Password" },
   ];
+
+  const [loginDetails, setLoginDetails] = useState({ Email: "", Password: "" });
+
+  const [signUpDetails, setSignUpDetails] = useState({
+    Name: "",
+    Email: "",
+    Password: "",
+    VerifyPassword: "",
+  });
+
+  console.log(loginDetails);
+
+  const LoginIn = async () => {
+    if (!loginDetails.Email) {
+      toast.error("Email required for login", {
+        ...toastOptions(),
+        autoClose: 2000,
+      });
+      return;
+    }
+    if (!loginDetails.Password) {
+      toast.error("Passowrd required for login", {
+        ...toastOptions(),
+        autoClose: 2000,
+      });
+      return;
+    }
+    await signInWithEmailAndPassword(
+      auth,
+      loginDetails.Email,
+      loginDetails.Password
+    )
+      // returns  an auth object after a successful authentication
+      // userAuth.user contains all our user details
+      .then((userAuth) => {
+        console.log("Succesful Login");
+        console.log(userAuth);
+        // store the user's information in the redux state
+        dispatch(
+          login({
+            email: userAuth.user.email,
+            uid: userAuth.user.uid,
+          })
+        );
+        toast.success("Login Successful", {
+          ...toastOptions(),
+          autoClose: 3000,
+        });
+        setOpenLogin((prev) => !prev);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const CreateUser = async () => {
+    if (!signUpDetails.Email) {
+      toast.error("Email required to create user", {
+        ...toastOptions(),
+        autoClose: 2000,
+      });
+      return;
+    }
+    if (!signUpDetails.Password) {
+      toast.error("Password required to create user", {
+        ...toastOptions(),
+        autoClose: 2000,
+      });
+      return;
+    }
+    if (!signUpDetails.Name) {
+      toast.error("Name required to create user", {
+        ...toastOptions(),
+        autoClose: 2000,
+      });
+      return;
+    }
+    if (signUpDetails.Password != signUpDetails.VerifyPassword) {
+      toast.error("Password does not match verify password", {
+        ...toastOptions(),
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    await createUserWithEmailAndPassword(
+      auth,
+      signUpDetails.Email,
+      signUpDetails.Password
+    ).then(async (userAuth) => {
+      const data = await axios
+        .post(
+          `http://${process.env.NEXT_PUBLIC_SERVER_HOST}//api/customerChanges`,
+          { name: signUpDetails.Name, email: userAuth.user.email }
+        )
+        .catch((err) => {
+          return;
+        });
+      dispatch(
+        login({
+          email: userAuth.user.email,
+          uid: userAuth.user.uid,
+        })
+      );
+      toast.success("User Created", { ...toastOptions(), autoClose: 3000 });
+    });
+  };
+
   console.log(collectionOpen);
   let isOnRisque = router.asPath === "/Risque";
   const isOnOtherCollection =
     router.asPath === "/Casual" || router.asPath === "/Formal";
   return (
     <div className="">
+      <ToastContainer></ToastContainer>
       <div
         className={`w-full font-Poppins text-xs fixed p-6 pl-2 md:p-0 flex duration-300 items-center ${
           collectionOpen ? "z-[100]" : "z-30"
@@ -115,16 +268,47 @@ export default function Mheader() {
             }
           })}
         </div>
+
         <div className=" font-SecFont flex items-center justify-center absolute right-4 border-black md:text-4xl text-xl line-through h-full">
-          <button
-            onClick={() => {
-              setCollectionOpen(false);
-              setOpenLogin((prev) => !prev);
-            }}
-            className="relative mr-6 "
-          >
-            {NotLoginUser("fill-red-500", "20", "20")}
-          </button>{" "}
+          {loggedIn ? (
+            <div className="flex flex-col items-center mr-6">
+              <button
+                onClick={() => {
+                  setIsUserMenuOpen((prev) => !prev);
+                }}
+                className="relative"
+              >
+                {LoginUser("fill-red-500", "20", "20")}
+              </button>
+              {isUserMenuOpen && (
+                <div className="absolute border border-red-500 mt-8 text-xs w-20 shadow-md flex flex-col bg-white text-black">
+                  <button
+                    onClick={() => {
+                      dispatch(logout());
+                    }}
+                    className="p-2 border-b border-red-500 hover:text-red-500 duration-300"
+                  >
+                    LogOut
+                  </button>
+                  <button className="p-2 hover:text-green-400 duration-300">
+                    Your Data
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="flex flex-col items-center mr-6">
+              <button
+                onClick={() => {
+                  setCollectionOpen(false);
+                  setOpenLogin((prev) => !prev);
+                }}
+                className="relative "
+              >
+                {NotLoginUser("fill-red-500", "20", "20")}
+              </button>
+            </div>
+          )}
           <div className="relative mr-6 ">
             <span className="absolute font-Oswald text-sm -right-2 -top-2 h-4 w-4  flex items-center justify-center rounded-full">
               {cartVal.itemsNo}
@@ -207,28 +391,53 @@ export default function Mheader() {
                 {dataForLogin.map((loginDetails) => {
                   return (
                     <input
-                      key={loginDetails.name}
+                      key={loginDetails.name + "m"}
+                      name={loginDetails.name}
+                      onChange={(e) => {
+                        setLoginDetails((prev) => {
+                          return { ...prev, [e.target.name]: e.target.value };
+                        });
+                      }}
                       placeholder={loginDetails.name}
                       className="p-2  border-b border-red-500 mb-2 font-Poppins"
                     ></input>
                   );
                 })}
-                <button className="mt-4 border border-black p-2 font-Poppins text-sm">
+                <button
+                  onClick={() => {
+                    LoginIn();
+                  }}
+                  className="mt-4 border border-black p-2 font-Poppins text-sm"
+                >
                   Login
                 </button>
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center">
-                {dataForNewUser.map((loginDetails) => {
+                {dataForNewUser.map((newUserDetails) => {
                   return (
                     <input
-                      key={loginDetails.name}
-                      placeholder={loginDetails.name}
+                      key={newUserDetails.name}
+                      name={newUserDetails.name}
+                      onChange={(e) => {
+                        setSignUpDetails((prev) => {
+                          if (e.target.name === "Verify Password") {
+                            return { ...prev, VerifyPassword: e.target.value };
+                          }
+                          return { ...prev, [e.target.name]: e.target.value };
+                        });
+                      }}
+                      placeholder={newUserDetails.name}
                       className="p-2  border-b border-red-500 mb-2 font-Poppins"
                     ></input>
                   );
                 })}
-                <button className="mt-4 border border-black p-2 font-Poppins text-sm">
+                <button
+                  onClick={() => {
+                    CreateUser();
+                  }}
+                  className="mt-4 border border-black p-2 font-Poppins text-sm"
+                >
                   Create Account
                 </button>
               </div>

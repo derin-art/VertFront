@@ -35,7 +35,7 @@ export default function ItemLink(props: ItemLinkProps) {
       <LazyLoadImage
         className="md:h-[300px] md:w-[220px] h-[180px] w-[132px] object-cover  shadow-md"
         src={props.data.urls[0].imgUrl}
-        alt={"Test"}
+        alt={props.data.name}
         loading="lazy"
         placeholderSrc={props.data.urls[0].blurUrl}
       ></LazyLoadImage>
