@@ -10,7 +10,13 @@ import {
 } from "../../hooks/useToastPopup";
 import CartIcon from "../../public/icons/cartIcon";
 import { useRouter } from "next/router";
-import { login, logout, selectUser } from "../../Features/authSlice";
+import {
+  login,
+  logout,
+  selectUser,
+  setOpenLoginRedux,
+  setOpenLoginReduxSet,
+} from "../../Features/authSlice";
 import {
   auth,
   onAuthStateChanged,
@@ -28,9 +34,12 @@ import { ToastContainer, toast } from "react-toastify";
 export default function Mheader() {
   const dispatch = useAppDispatch();
   const toastId: any = useRef(null);
+  const loginReduxState = useAppSelector(
+    (state) => state.user.value.openLoginRedux
+  );
 
   const router = useRouter();
-  const [newUser, setNewUser] = useState(false);
+  const [newUser, setNewUser] = useState(true);
   const { ITEM } = router.query;
   const Links = ["home", "items"];
   const otherLinks = ["SHIRTS", "JACKETS", "T-SHIRTS"];
@@ -50,13 +59,21 @@ export default function Mheader() {
   const loggedIn = userLoginState.email && userLoginState.uid;
 
   useEffect(() => {
-    onAuthStateChanged(auth, (userAuth) => {
+    onAuthStateChanged(auth, async (userAuth) => {
       if (userAuth) {
-        // user is logged in, send the user's details to redux, store the current user in the state
+        const userMongoData: any = await axios
+          .get(
+            `http://${process.env.NEXT_PUBLIC_SERVER_HOST}/api/customerChanges?email=${userAuth.email}`
+          )
+          .catch((err) => {
+            console.log(err);
+            return;
+          });
         dispatch(
           login({
             email: userAuth.email,
             uid: userAuth.uid,
+            mongoData: userMongoData.data,
           })
         );
       } else {
@@ -107,14 +124,24 @@ export default function Mheader() {
     )
       // returns  an auth object after a successful authentication
       // userAuth.user contains all our user details
-      .then((userAuth) => {
+      .then(async (userAuth) => {
         console.log("Succesful Login");
         console.log(userAuth);
         // store the user's information in the redux state
+        const userMongoData: any = await axios
+          .get(
+            `http://${process.env.NEXT_PUBLIC_SERVER_HOST}/api/customerChanges?email=${userAuth.user.email}`
+          )
+          .catch((err) => {
+            console.log(err);
+            return;
+          });
+        console.log("sds", userMongoData);
         dispatch(
           login({
             email: userAuth.user.email,
             uid: userAuth.user.uid,
+            mongoData: userMongoData.data,
           })
         );
         update(toastId, "Login Successful");
@@ -177,27 +204,29 @@ export default function Mheader() {
       signUpDetails.Email,
       signUpDetails.Password
     ).then(async (userAuth) => {
-      const data = await axios
+      await axios
         .post(
-          `http://${process.env.NEXT_PUBLIC_SERVER_HOST}//api/customerChanges`,
-          { name: signUpDetails.Name, email: userAuth.user.email }
+          `http://${process.env.NEXT_PUBLIC_SERVER_HOST}/api/customerChanges?name=${signUpDetails.Name}&email=${userAuth.user.email}`
         )
+        .then(() => {
+          dispatch(
+            login({
+              email: userAuth.user.email,
+              uid: userAuth.user.uid,
+            })
+          );
+          setOpenLogin((prev) => !prev);
+          setIsUserMenuOpen(false);
+          update(toastId, "User created and logged in");
+        })
         .catch((err) => {
+          console.log(err);
           ifErrorUpdate(
             toastId,
             "An error occured, please check your internet"
           );
           return;
         });
-      dispatch(
-        login({
-          email: userAuth.user.email,
-          uid: userAuth.user.uid,
-        })
-      );
-      setOpenLogin((prev) => !prev);
-      setIsUserMenuOpen(false);
-      update(toastId, "User created and logged in");
     });
   };
 
@@ -205,19 +234,22 @@ export default function Mheader() {
   let isOnRisque = router.asPath === "/Risque";
   const isOnOtherCollection =
     router.asPath === "/Casual" || router.asPath === "/Formal";
+  console.log("rr", isOnRisque);
   return (
     <div className="">
       <ToastContainer></ToastContainer>
       <div
         className={`w-full font-Poppins text-xs fixed p-6 pl-2 md:p-0 flex duration-300 items-center ${
           collectionOpen ? "z-[100]" : "z-30"
-        } ${
-          !isOnRisque && !collectionBool
-            ? "bg-black text-white"
-            : isOnOtherCollection
-            ? "bg-black text-white"
-            : "text-black"
-        }   ${isOnRisque && "text-red-500"}`}
+        }  ${
+          !isOnRisque
+            ? !isOnRisque && !collectionBool
+              ? "bg-black text-white"
+              : isOnOtherCollection
+              ? "bg-black text-white"
+              : "text-black"
+            : "text-red-500"
+        }   `}
       >
         <div className="flex ">
           {Links.map((item, index) => {
@@ -293,7 +325,7 @@ export default function Mheader() {
 
         <div className=" font-SecFont flex items-center justify-center absolute right-4 border-black md:text-4xl text-xl line-through h-full">
           {loggedIn ? (
-            <div className="flex flex-col items-center mr-6">
+            <div className="flex flex-col items-center md:mr-6 mr-4">
               <button
                 onClick={() => {
                   setIsUserMenuOpen((prev) => !prev);
@@ -325,7 +357,8 @@ export default function Mheader() {
               <button
                 onClick={() => {
                   setCollectionOpen(false);
-                  setOpenLogin((prev) => !prev);
+
+                  dispatch(setOpenLoginRedux());
                 }}
                 className="relative "
               >
@@ -333,7 +366,7 @@ export default function Mheader() {
               </button>
             </div>
           )}
-          <Link href={"/Cart"} className="relative mr-6 ">
+          <Link href={"/Cart"} className="relative md:mr-6 mr-2 ">
             <span className="absolute font-Oswald text-sm -right-2 -top-2 h-4 w-4  flex items-center justify-center rounded-full">
               {cartVal.length}
             </span>
@@ -401,16 +434,29 @@ export default function Mheader() {
         initial={{
           opacity: 0,
         }}
-        animate={openLogin ? { opacity: 1, y: 0 } : { opacity: 0, y: -400 }}
+        animate={
+          loginReduxState ? { opacity: 1, y: 0 } : { opacity: 0, y: -400 }
+        }
         transition={{ duration: 0.56 }}
         className={`w-full h-screen fixed top-16 bg-transparent  backdrop-blur-sm ${
-          openLogin ? "z-40" : "z-[0]"
+          loginReduxState ? "z-40" : "z-[0]"
         }`}
       >
         <div className="absolute h-screen  w-screen top-0 flex z-40 flex-col items-center justify-center ">
-          <div className="-mt-10 crossBackGround shadow-md w-4/5 h-4/5 md:w-2/5 md:h-3/5 bg-white border border-red-500 flex flex-col items-center justify-center border  blur-none">
-            <div className="absolute text-red-500 font-Oswald top-10 text-lg">
+          <div className="-mt-10 crossBackGround rounded-lg shadow-md w-4/5 h-4/5 md:w-2/5 md:h-3/5 bg-white border border-black flex flex-col items-center justify-center  blur-none">
+            <div className="absolute text-red-500 font-PlayI bottom-10 text-3xl">
               Vert
+            </div>
+            <div className="absolute text-black font-Oswald top-4 text-lg md:text-xl flex flex-col">
+              <button
+                onClick={() => {
+                  dispatch(setOpenLoginRedux());
+                }}
+                className="font-Poppins text-red-500 hover:text-red-700 duration-300"
+              >
+                x
+              </button>
+              {newUser ? "Login" : "Create a new User"}
             </div>
             {newUser ? (
               <div className="flex flex-col items-center justify-center">
@@ -472,7 +518,7 @@ export default function Mheader() {
               onClick={() => {
                 setNewUser((prev) => !prev);
               }}
-              className="mt-4 text-xs font-Poppins"
+              className="mt-4 text-xs font-Poppins hover:text-red-500 duration-300"
             >
               {newUser ? "New User?" : "I'm familiar with your game."}
             </button>

@@ -73,7 +73,7 @@ export default function Cart() {
               );
             })}
           </div>
-          <div className="flex flex-col z-30 text-4xl items-center w-1/4  h-4/5 font-Oswald">
+          <div className="flex flex-col z-30 text-4xl items-center w-1/4  h-4/5 font-Oswald border-l border-black">
             <div className="pt-4 ">Grand Total</div>
             <div className="font-PlayI ">${grandTotal}</div>
             <button className="mt-20 font-Poppins border border-black text-white bg-red-500 p-2 text-sm z-30">
