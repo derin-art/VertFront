@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
-import N13 from "../public/TestImages/N13.jpg";
+import N13 from "../public/TestImages/N15.jpg";
 import V5 from "../public/TestImages/V5.jpg";
 import Center1 from "../public/TestImages/Center1.jpg";
 import Image from "next/image";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import Link from "next/link";
 
 type AltMainCenterProps = {
   openTimeLine: boolean;
@@ -89,7 +90,7 @@ export default function AltMainCenter(props: AltMainCenterProps) {
             {props.openTimeLine && (
               <>
                 <div className="absolute z-30 text-black font-Poppins bottom-2 right-2 text-xs">
-                  Vert
+                  Vert 2022
                 </div>
 
                 <Image
@@ -108,33 +109,46 @@ export default function AltMainCenter(props: AltMainCenterProps) {
         {/* Rendering images on TimeLine Open prop */}
         <AnimatePresence>
           <div className="relative flex ">
-            <div className="flex z-50  items-center justify-center md:-mr-2 space-x-2">
+            <div className="flex z-30  items-center justify-center md:-mr-2 space-x-2">
               {!props.openTimeLine &&
                 collectionsStand.map((item, index) => {
                   return (
-                    <motion.div
-                      animate="in"
-                      initial="out"
-                      exit={"out"}
-                      transition={{
-                        delay: index === 0 ? 0.2 : 0.4,
-                      }}
-                      variants={imageVariants}
-                      key={String(`${props.openTimeLine}-${index}`)}
-                      className=" "
-                    >
-                      {" "}
-                      <p className="absolute bottom-2 text-black ">2019</p>
-                      <Image
-                        key={index}
-                        src={item.src}
-                        height="295"
-                        width="190"
-                        unoptimized={true}
-                        className={` z-30 border-black sm:mr-24 md:-ml-4 border w-[150px] md:object-cover md:h-[295px] md:w-[190px]`}
-                        alt="TestImage"
-                      ></Image>
-                    </motion.div>
+                    <Link href={"/Time"}>
+                      <motion.div
+                        animate="in"
+                        initial="out"
+                        exit={"out"}
+                        transition={{
+                          delay: index === 0 ? 0.2 : 0.4,
+                        }}
+                        variants={imageVariants}
+                        key={String(`${props.openTimeLine}-${index}`)}
+                        className=" "
+                      >
+                        {" "}
+                        <div className="absolute bottom-2 h-1/4  text-white  text-base flex items-center justify-center text-center font-Oswald w-[150px] md:w-[190px]">
+                          <div className="w-3/4 mr-[4px]">
+                            {index === 0 ? (
+                              <div>
+                                <p>Vert</p>
+                                Future States
+                              </div>
+                            ) : (
+                              "Vert 2021"
+                            )}
+                          </div>
+                        </div>
+                        <Image
+                          key={index}
+                          src={item.src}
+                          height="295"
+                          width="190"
+                          unoptimized={true}
+                          className={` z-30 border-black sm:mr-24  border-2 w-[150px] md:object-cover md:h-[295px] md:w-[190px]`}
+                          alt="TestImage"
+                        ></Image>
+                      </motion.div>
+                    </Link>
                   );
                 })}
             </div>

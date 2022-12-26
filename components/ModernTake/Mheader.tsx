@@ -234,16 +234,21 @@ export default function Mheader() {
   let isOnRisque = router.asPath === "/Risque";
   const isOnOtherCollection =
     router.asPath === "/Casual" || router.asPath === "/Formal";
-  console.log("rr", isOnRisque);
+
+  const isOnTime = router.asPath === "/Time";
+
+  const isOn = !isOnRisque && !collectionBool;
+
+  console.log("rr", isOnRisque, isOnTime);
   return (
     <div className="">
       <ToastContainer></ToastContainer>
       <div
         className={`w-full font-Poppins text-xs fixed p-6 pl-2 md:p-0 flex duration-300 items-center ${
-          collectionOpen ? "z-[100]" : "z-30"
+          collectionOpen || loginReduxState ? "z-[100]" : "z-30"
         }  ${
           !isOnRisque
-            ? !isOnRisque && !collectionBool
+            ? isOn && !isOnTime
               ? "bg-black text-white"
               : isOnOtherCollection
               ? "bg-black text-white"
@@ -438,12 +443,12 @@ export default function Mheader() {
           loginReduxState ? { opacity: 1, y: 0 } : { opacity: 0, y: -400 }
         }
         transition={{ duration: 0.56 }}
-        className={`w-full h-screen fixed top-16 bg-transparent  backdrop-blur-sm ${
+        className={`w-full h-screen fixed top-0 bg-transparent  backdrop-blur-sm ${
           loginReduxState ? "z-40" : "z-[0]"
         }`}
       >
-        <div className="absolute h-screen  w-screen top-0 flex z-40 flex-col items-center justify-center ">
-          <div className="-mt-10 crossBackGround rounded-lg shadow-md w-4/5 h-4/5 md:w-2/5 md:h-3/5 bg-white border border-black flex flex-col items-center justify-center  blur-none">
+        <div className="absolute h-screen mt-10  w-screen top-0 flex  flex-col items-center justify-center ">
+          <div className="-mt-10 crossBackGround rounded-lg shadow-md w-4/5 h-4/5 lg:w-2/5 lg:h-3/5 bg-white border border-black flex flex-col items-center justify-center  blur-none">
             <div className="absolute text-red-500 font-PlayI bottom-10 text-3xl">
               Vert
             </div>

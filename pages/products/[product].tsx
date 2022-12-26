@@ -45,7 +45,10 @@ export default function Product(props: ProductProps) {
   const userMongoDataRedux = useAppSelector(
     (state) => state.user.value.mongoData
   );
-  console.log(useAppSelector((state) => state.cart.value));
+  console.log(
+    "sdsdsd",
+    useAppSelector((state) => state.cart.value)
+  );
 
   const userLoginState = useAppSelector((state) => state.user.value);
   const loginMenuReduxState = useAppSelector(
@@ -181,16 +184,30 @@ export default function Product(props: ProductProps) {
           <div>
             <div className="mt-2 flex flex-col items-center justify-center">
               <div className="flex justify-around w-full mb-2">
-                <button className="text-xl">+</button>
+                <button
+                  onClick={() => {
+                    dispatch(addToCart(props.data));
+                  }}
+                  className="text-xl"
+                >
+                  +
+                </button>
                 <button>{Star("24", "24", "fill-red-500")}</button>
-                <button className="text-xl">-</button>
+                <button
+                  onClick={() => {
+                    dispatch(removeFromCart(props.data._id));
+                  }}
+                  className="text-xl"
+                >
+                  -
+                </button>
               </div>
               <div className="flex text-sm w-full">
                 {" "}
-                <p className="w-1/2 border-r flex items-center  justify-center p-1 font-Oswald flex-wrap">
+                <p className="w-1/2 border-r flex items-center  justify-center p-2 font-Oswald flex-wrap">
                   {props.data.name}{" "}
                 </p>{" "}
-                <p className="w-1/2 flex items-center justify-center p-1 font-PlayI text-red-500">
+                <p className="w-1/2 flex items-center justify-center p-1 font-Grad text-red-500">
                   ${props.data.price}
                 </p>
               </div>
@@ -200,7 +217,7 @@ export default function Product(props: ProductProps) {
 
         <div className="w-2/5 hidden z-30 md:flex md:h-[450px] md:w-[330px] h-[180px] w-[132px] flex-col p-2">
           <div className="font-Oswald md:text-5xl">{props.data.name}</div>
-          <div className="md:text-4xl font-Grad text-red-500">
+          <div className="md:text-4xl font-Grad text-red-500 mt-1">
             ${props.data.price}
           </div>
           <div className="font-Poppins mt-4">{props.data.Description}</div>

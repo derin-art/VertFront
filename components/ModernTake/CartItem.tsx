@@ -33,22 +33,27 @@ export default function CartItem(props: CartItemProps) {
     <div className="flex border w-full p-2 relative border-black">
       <div className="flex items-center justify-center">
         <LazyLoadImage
-          className="h-[150px] object-cover w-[112px]"
+          className="md:h-[150px] h-[75px] w-[56px] object-cover md:w-[112px]"
           loading="lazy"
           alt={props.data.name}
           src={props.data.urls[0].imgUrl}
           placeholderSrc={props.data.urls[0].blurUrl}
         ></LazyLoadImage>
       </div>
-      <div className="flex flex-col ml-2 font-Poppins">
-        <p className="text-2xl  font-Poppins"> {props.data.name}</p>
-        <p>{props.data.itemCollection} Collection</p>
-        <div className="flex text-xs space-x-4">
+      <div className="flex flex-col ml-2 font-Poppins w-2/4 ">
+        <p className="lg:text-2xl md:text-xl text-xs  font-Poppins">
+          {" "}
+          {props.data.name}
+        </p>
+        <p className="lg:text-base md:text-sm text-[9px]">
+          {props.data.itemCollection} Collection
+        </p>
+        <div className="flex text-[10px] mt-2 space-x-2 md:space-x-4">
           <button
             onClick={() => {
               dispatch(addToCart(itemWithoutQuantity));
             }}
-            className="border border p-2 border-black"
+            className="border border md:p-2 p-1 border-black"
           >
             add item
           </button>
@@ -56,18 +61,18 @@ export default function CartItem(props: CartItemProps) {
             onClick={() => {
               dispatch(removeFromCart(itemWithoutQuantity._id));
             }}
-            className="border border p-2 border-black"
+            className="border border md:p-2 p-1 border-black"
           >
             remove item
           </button>
         </div>
       </div>
-      <div className="absolute right-2 flex flex-col text-2xl font-Poppins">
-        <div>
+      <div className="absolute text-sm md:right-2 right-1 flex flex-col md:text-2xl font-Poppins">
+        <div className="">
           {" "}
           ${props.data.price} x {props.data.quantity}
         </div>
-        <div className=" text-4xl justify-self-end font-PlayI">
+        <div className="md:text-4xl text-lg justify-self-end font-PlayI">
           ${props.data.quantity && props.data.price * props.data.quantity}
         </div>
       </div>

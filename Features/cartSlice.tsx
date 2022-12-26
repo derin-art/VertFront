@@ -29,11 +29,28 @@ export const cartSlice = createSlice({
       state.value.cartItems = [...state.value.cartItems, action.payload];
     },
     removeFromCart: (state, action) => {
-      state.value.cartItems = [...state.value.cartItems].filter((item: any) => {
+      let deleteArray: any = [];
+      [...state.value.cartItems].forEach((item: any, index) => {
         if (item._id != action.payload) {
           return item;
-        } else return;
+        } else {
+          deleteArray.push({ ...item, index: index });
+        }
       });
+      let arr = [...state.value.cartItems];
+
+      console.log(
+        "dede",
+        arr.splice(deleteArray[0].index, deleteArray[0].index + 1)
+      );
+      state.value.cartItems = [...state.value.cartItems].filter(
+        (item: any, index) => {
+          if (index === deleteArray[0].index) return;
+          else {
+            return item;
+          }
+        }
+      );
     },
     addMultiple: (state, action: PayloadAction<number>) => {
       state.value.itemsNo += action.payload;
