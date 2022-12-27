@@ -28,6 +28,9 @@ export const cartSlice = createSlice({
     addToCart: (state, action) => {
       state.value.cartItems = [...state.value.cartItems, action.payload];
     },
+    clearCart: (state) => {
+      state.value.cartItems = [];
+    },
     removeFromCart: (state, action) => {
       let deleteArray: any = [];
       [...state.value.cartItems].forEach((item: any, index) => {
@@ -58,8 +61,14 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { increment, decrement, addMultiple, addToCart, removeFromCart } =
-  cartSlice.actions;
+export const {
+  increment,
+  clearCart,
+  decrement,
+  addMultiple,
+  addToCart,
+  removeFromCart,
+} = cartSlice.actions;
 
 export const selectCartNo = (state: RootState) => state.cart.value;
 

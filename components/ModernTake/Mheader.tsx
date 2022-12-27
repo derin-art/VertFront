@@ -340,7 +340,7 @@ export default function Mheader() {
                 {LoginUser("fill-red-500", "20", "20")}
               </button>
               {isUserMenuOpen && (
-                <div className="absolute border border-red-500 mt-8 text-xs w-20 shadow-md flex flex-col bg-white text-black">
+                <div className="absolute border border-red-500 md:mt-8 mt-4 text-xs w-20 z-40 shadow-md flex flex-col bg-white text-black">
                   <button
                     onClick={async () => {
                       return await signOut(auth).then(() => {
@@ -351,9 +351,19 @@ export default function Mheader() {
                   >
                     LogOut
                   </button>
-                  <button className="p-2 hover:text-green-400 duration-300">
-                    Your Data
-                  </button>
+                  <Link
+                    href={`/User/${userLoginState.mongoData._id}`}
+                    className=""
+                  >
+                    <button
+                      onClick={() => {
+                        setIsUserMenuOpen((prev) => false);
+                      }}
+                      className="p-2 hover:text-green-400 duration-300  w-full"
+                    >
+                      Your Data
+                    </button>
+                  </Link>
                 </div>
               )}
             </div>

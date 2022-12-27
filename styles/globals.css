@@ -197,12 +197,11 @@ a {
 
 .glitch {
   position: relative;
-  font-size: 80px;
+
   font-weight: 700;
   line-height: 1.2;
 
   letter-spacing: 5px;
-  z-index: 1;
 }
 
 .glitch:before {

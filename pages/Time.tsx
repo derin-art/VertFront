@@ -1,7 +1,7 @@
 import axios from "axios";
 import ItemLinks from "../components/PagesComponents/ItemLinks";
 import ScrollIntoView from "react-scroll-into-view";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -55,8 +55,25 @@ export default function Time(props: ShirtsProps) {
     finalArray.push(chunk);
   }
   console.log("sd", finalArray);
+
+  const variants = {
+    out: {
+      opacity: 0,
+      transition: {
+        duration: 0.75,
+      },
+    },
+    in: {
+      opacity: 1,
+      transition: {
+        duration: 0.75,
+        delay: 0.3,
+      },
+    },
+  };
+
   return (
-    <div className="snap-mandatory snap-y ">
+    <div className="snap-mandatory snap-y bg-white">
       <div className="text-gray-100 "></div>
       <div className="text-gray-300 "></div>
       <div className="text-gray-400 "></div>
@@ -80,7 +97,25 @@ export default function Time(props: ShirtsProps) {
             }`}
           >
             {" "}
-            <motion.div className="fixed flex flex-col text-4xl font-Oswald items-center justify-center ">
+            <motion.div className="fixed   h-full pt-20  w-full flex justify-center md:hidden">
+              <AnimatePresence>
+                <motion.div
+                  key={place}
+                  variants={variants}
+                  animate="in"
+                  initial="out"
+                  exit={"out"}
+                  className="flex-col items-start font-Oswald absolute"
+                >
+                  {itemDates.map((item, index) => {
+                    if (index === place) {
+                      return <div>{item.name}</div>;
+                    }
+                  })}
+                </motion.div>
+              </AnimatePresence>
+            </motion.div>
+            <motion.div className="fixed md:flex flex-col text-4xl font-Oswald items-center justify-center text-black hidden ">
               {itemDates.map((item, index) => {
                 const remainder = Math.abs(index - place) * 100;
                 let val = 700 - remainder;

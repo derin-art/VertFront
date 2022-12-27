@@ -113,7 +113,7 @@ export default function AltMainCenter(props: AltMainCenterProps) {
               {!props.openTimeLine &&
                 collectionsStand.map((item, index) => {
                   return (
-                    <Link href={"/Time"}>
+                    <Link href={index === 0 ? "/Future" : "/Time"} key={index}>
                       <motion.div
                         animate="in"
                         initial="out"

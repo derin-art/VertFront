@@ -26,7 +26,7 @@ type ProductProps = {
 
 export default function Varsity(props: ProductProps) {
   return (
-    <div className=" flex items-center justify-center h-fit md:h-screen w-screen">
+    <div className=" flex items-center justify-center h-fit md:h-screen w-screen bg-white">
       <div className="w-full h-full bg-transparent flex md:flex-row flex-col space-y-4 md:space-y-0 py-24 md:py-0 justify-around items-center">
         {props.allItems.data.map((item, index) => {
           return (

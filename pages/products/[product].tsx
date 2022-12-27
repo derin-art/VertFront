@@ -161,7 +161,7 @@ export default function Product(props: ProductProps) {
   };
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center z-30">
+    <div className="w-screen h-screen  flex items-center justify-center z-30 bg-white text-black overflow-y-hidden">
       <div className="w-4/5 h-4/5  flex md:flex-row flex-col items-center justify-center">
         <div className="relative -mt-8 md:mt-0">
           {isInMongoData && (
@@ -180,7 +180,7 @@ export default function Product(props: ProductProps) {
           ></LazyLoadImage>
         </div>
 
-        <div className="h-2/4 w-full text-black bg-white border absolute -bottom-1/3 rounded-t-[60px] md:hidden">
+        <div className="h-1/6 w-full text-black bg-white border absolute bottom-0 rounded-t-[60px] md:hidden ">
           <div>
             <div className="mt-2 flex flex-col items-center justify-center">
               <div className="flex justify-around w-full mb-2">
