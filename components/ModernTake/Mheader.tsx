@@ -49,11 +49,6 @@ export default function Mheader() {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [collectionOpen, setCollectionOpen] = useState(false);
 
-  console.log(
-    "user",
-    useAppSelector((state) => state.user.value)
-  );
-
   const userLoginState = useAppSelector((state) => state.user.value);
 
   const loggedIn = userLoginState.email && userLoginState.uid;
@@ -99,8 +94,6 @@ export default function Mheader() {
     VerifyPassword: "",
   });
 
-  console.log(loginDetails);
-
   const LoginIn = async () => {
     if (!loginDetails.Email) {
       toast.error("Email required for login", {
@@ -126,7 +119,7 @@ export default function Mheader() {
       // userAuth.user contains all our user details
       .then(async (userAuth) => {
         console.log("Succesful Login");
-        console.log(userAuth);
+
         // store the user's information in the redux state
         const userMongoData: any = await axios
           .get(
@@ -136,7 +129,7 @@ export default function Mheader() {
             console.log(err);
             return;
           });
-        console.log("sds", userMongoData);
+
         dispatch(
           login({
             email: userAuth.user.email,
@@ -230,7 +223,6 @@ export default function Mheader() {
     });
   };
 
-  console.log(collectionOpen);
   let isOnRisque = router.asPath === "/Risque";
   const isOnOtherCollection =
     router.asPath === "/Casual" || router.asPath === "/Formal";
@@ -239,7 +231,6 @@ export default function Mheader() {
 
   const isOn = !isOnRisque && !collectionBool;
 
-  console.log("rr", isOnRisque, isOnTime);
   return (
     <div className="">
       <ToastContainer></ToastContainer>
