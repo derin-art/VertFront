@@ -19,7 +19,7 @@ export default function Collection() {
   const [other, setOther] = useState(false);
   const [other2, setOther2] = useState(false);
   const collectionBool = useAppSelector((state) => state.collection.value);
-  console.log("ezio", collectionBool);
+
   const dispatch = useAppDispatch();
   const ThisIs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
   const images = [

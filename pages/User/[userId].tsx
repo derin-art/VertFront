@@ -81,7 +81,7 @@ export default function UserData(props: UserProps) {
 
 export async function getServerSideProps(context: any) {
   const { req, query, res, asPath, pathname } = context;
-  console.log("as", query);
+
   const userId = query.userId;
   const data: any = await axios
     .get(
@@ -90,8 +90,6 @@ export async function getServerSideProps(context: any) {
     .catch((err) => {
       console.log(err);
     });
-  if (data) {
-    console.log(data.data);
-  }
+
   return { props: { allItems: { data: data.data } } };
 }
