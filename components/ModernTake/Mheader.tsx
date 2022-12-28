@@ -58,7 +58,7 @@ export default function Mheader() {
       if (userAuth) {
         const userMongoData: any = await axios
           .get(
-            `http://${process.env.NEXT_PUBLIC_SERVER_HOST}/api/customerChanges?email=${userAuth.email}`
+            `https://${process.env.NEXT_PUBLIC_SERVER_HOST}/api/customerChanges?email=${userAuth.email}`
           )
           .catch((err) => {
             console.log(err);
@@ -94,6 +94,70 @@ export default function Mheader() {
     VerifyPassword: "",
   });
 
+  const MockLoginIn = async (email: string, password: string) => {
+    if (!loginDetails.Email) {
+      toast.error("Email required for login", {
+        ...toastOptions(),
+        autoClose: 2000,
+      });
+      return;
+    }
+    if (!loginDetails.Password) {
+      toast.error("Passowrd required for login", {
+        ...toastOptions(),
+        autoClose: 2000,
+      });
+      return;
+    }
+    notify(toastId, "Signing In");
+    await signInWithEmailAndPassword(auth, email, password)
+      // returns  an auth object after a successful authentication
+      // userAuth.user contains all our user details
+      .then(async (userAuth) => {
+        console.log("Succesful Login");
+
+        // store the user's information in the redux state
+        const userMongoData: any = await axios
+          .get(
+            `https://${process.env.NEXT_PUBLIC_SERVER_HOST}/api/customerChanges?email=${userAuth.user.email}`
+          )
+          .catch((err) => {
+            console.log(err);
+            return;
+          });
+
+        dispatch(
+          login({
+            email: userAuth.user.email,
+            uid: userAuth.user.uid,
+            mongoData: userMongoData.data,
+          })
+        );
+        update(toastId, "Login Successful");
+        setOpenLogin((prev) => !prev);
+        setIsUserMenuOpen(false);
+      })
+      .catch((err) => {
+        switch (err.code) {
+          case "auth/user-not-found":
+            ifErrorUpdate(toastId, "User Not found");
+            break;
+          case "auth/wrong-password":
+            ifErrorUpdate(toastId, "Wrong Password");
+            break;
+          case "auth/invalid-email":
+            ifErrorUpdate(toastId, "Invalid Email");
+            break;
+
+          default:
+            ifErrorUpdate(toastId, "Bad Connection");
+            break;
+        }
+        console.log(err);
+        return;
+      });
+  };
+
   const LoginIn = async () => {
     if (!loginDetails.Email) {
       toast.error("Email required for login", {
@@ -123,7 +187,7 @@ export default function Mheader() {
         // store the user's information in the redux state
         const userMongoData: any = await axios
           .get(
-            `http://${process.env.NEXT_PUBLIC_SERVER_HOST}/api/customerChanges?email=${userAuth.user.email}`
+            `https://${process.env.NEXT_PUBLIC_SERVER_HOST}/api/customerChanges?email=${userAuth.user.email}`
           )
           .catch((err) => {
             console.log(err);
@@ -199,7 +263,7 @@ export default function Mheader() {
     ).then(async (userAuth) => {
       await axios
         .post(
-          `http://${process.env.NEXT_PUBLIC_SERVER_HOST}/api/customerChanges?name=${signUpDetails.Name}&email=${userAuth.user.email}`
+          `https://${process.env.NEXT_PUBLIC_SERVER_HOST}/api/customerChanges?name=${signUpDetails.Name}&email=${userAuth.user.email}`
         )
         .then(() => {
           dispatch(
@@ -492,11 +556,7 @@ export default function Mheader() {
                 </button>
                 <button
                   onClick={() => {
-                    setLoginDetails({
-                      Email: "chris3@gmail.com",
-                      Password: "password1",
-                    });
-                    LoginIn();
+                    MockLoginIn("chris3@gmail.com", "password1");
                   }}
                   className="text-xs w-4/5 mt-2 font-Poppins"
                 >

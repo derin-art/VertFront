@@ -66,7 +66,6 @@ export default function Cart() {
     grandTotal += item.price * item.quantity;
   });
 
-
   const loggedIn: boolean = userLoginState.email && userLoginState.uid;
 
   const checkOutRequest = async () => {
@@ -79,7 +78,7 @@ export default function Cart() {
       return;
     }
     const date = new Date();
-    
+
     const newArrayForBougth = reduceItemsToGetQuantityArray.map((item) => {
       return {
         ...item,
@@ -92,7 +91,7 @@ export default function Cart() {
 
     const data = await axios
       .put(
-        `http://${
+        `https://${
           process.env.NEXT_PUBLIC_SERVER_HOST
         }/api/customerChanges?email=${userLoginState.email}&Bought=${true}`,
         { item: newArrayForBougth }
@@ -102,7 +101,6 @@ export default function Cart() {
         ifErrorUpdate(toastId, "An error occured, please check your internet");
       });
     if (data) {
-      
       update(toastId, "Purchase Successful!");
       dispatch(clearCart());
     }

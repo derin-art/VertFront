@@ -101,7 +101,7 @@ export default function CollectionImage(props: CollectionImageProps) {
           src={props.img.src}
         ></Image>
       </div>
-      <div className="h-1/4 w-full absolute bg-red-500 font-Poppins hidden md:block bottom-0 flex flex-col text-black text-xs text-right p-2">
+      <div className="h-1/4 w-full absolute bg-red-500 font-Oswald hidden md:block bottom-0 flex flex-col text-black text-xs text-right p-2">
         trademark ®VERT {props.date}
         <div>styled by {props.by}</div>
         <div>model: {props.model}</div>

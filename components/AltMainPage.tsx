@@ -20,9 +20,9 @@ export default function AltMainPage() {
           onClick={() => {
             setOpenTimeLine((prev) => !prev);
           }}
-          className="absolute font-Oswald border border-black flex items-center justify-center text-xs hover:border-white duration-300 -right-1 top-14 p-2 z-30 border-black"
+          className="absolute font-Oswald border border-black flex items-center justify-center text-xs hover:border-white duration-300 -right-1 top-14 p-2 z-20 border-black"
         >
-          You might have missed...
+          {openTimeLine ? " You might have missed..." : "back"}
         </button>
       </div>
 

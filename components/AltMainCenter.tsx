@@ -123,18 +123,15 @@ export default function AltMainCenter(props: AltMainCenterProps) {
                         }}
                         variants={imageVariants}
                         key={String(`${props.openTimeLine}-${index}`)}
-                        className=" "
+                        className="group "
                       >
                         {" "}
-                        <div className="absolute bottom-2 h-1/4  text-white  text-base flex items-center justify-center text-center font-Oswald w-[150px] md:w-[190px]">
-                          <div className="w-3/4 mr-[4px]">
+                        <div className="absolute top-0 h-1/4 group-hover:text-red-500  text-white  text-base flex items-center justify-center text-center font-Oswald w-[150px] md:w-[190px]">
+                          <div className="w-3/4 duration-300 bg-black items-center flex justify-center text-xs border-red-500">
                             {index === 0 ? (
-                              <div>
-                                <p>Vert</p>
-                                Future States
-                              </div>
+                              <div>Vert Futures Project</div>
                             ) : (
-                              "Vert 2021"
+                              "Vert 2021 Archive"
                             )}
                           </div>
                         </div>
@@ -144,7 +141,7 @@ export default function AltMainCenter(props: AltMainCenterProps) {
                           height="295"
                           width="190"
                           unoptimized={true}
-                          className={` z-30 border-black sm:mr-24  border-2 w-[150px] md:object-cover md:h-[295px] md:w-[190px]`}
+                          className={` z-30 border-red-500 sm:mr-24   w-[150px] md:object-cover md:h-[295px] md:w-[190px]`}
                           alt="TestImage"
                         ></Image>
                       </motion.div>
