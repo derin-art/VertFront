@@ -27,7 +27,7 @@ type ProductProps = {
 export default function Varsity(props: ProductProps) {
   return (
     <div className=" flex items-center justify-center h-fit md:h-screen w-screen bg-white">
-      <div className="w-full h-full bg-transparent flex md:flex-row flex-col space-y-4 md:space-y-0 py-24 md:py-0 justify-around items-center">
+      <div className="w-full h-full bg-transparent flex md:flex-row flex-col space-y-4 md:space-y-0 py-32 md:py-0 justify-around items-center">
         {props.allItems.data.map((item, index) => {
           return (
             <div key={item._id} className={`z-20`}>
@@ -36,7 +36,7 @@ export default function Varsity(props: ProductProps) {
           );
         })}
       </div>
-      <div className="absolute text-black top-16 xl:top-4 w-full flex justify-center z-0">
+      <div className="absolute text-black top-20 xl:top-4 w-full flex justify-center z-0">
         {" "}
         <div className="font-Grad md:text-8xl lg:text-9xl  xl:text-[220px] z-20 bord w-full text-center border-black">
           VERTSITY®

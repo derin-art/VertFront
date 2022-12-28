@@ -22,7 +22,7 @@ export default function AltMainPage() {
           }}
           className="absolute font-Oswald border border-black flex items-center justify-center text-xs hover:border-white duration-300 -right-1 top-14 p-2 z-30 border-black"
         >
-          TimeLine
+          You might have missed...
         </button>
       </div>
 

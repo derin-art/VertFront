@@ -476,6 +476,7 @@ export default function Mheader() {
                           return { ...prev, [e.target.name]: e.target.value };
                         });
                       }}
+                      type={loginDetails.name === "Password" ? "password" : ""}
                       placeholder={loginDetails.name}
                       className="p-2  border-b border-red-500 mb-2 font-Poppins"
                     ></input>
@@ -488,6 +489,19 @@ export default function Mheader() {
                   className="mt-4 border border-black p-2 font-Poppins text-sm"
                 >
                   Login
+                </button>
+                <button
+                  onClick={() => {
+                    setLoginDetails({
+                      Email: "chris3@gmail.com",
+                      Password: "password1",
+                    });
+                    LoginIn();
+                  }}
+                  className="text-xs w-4/5 mt-2 font-Poppins"
+                >
+                  Don't want to create yet another fake account to checkout a
+                  project? Click here to login with a mock account
                 </button>
               </div>
             ) : (
@@ -505,6 +519,9 @@ export default function Mheader() {
                           return { ...prev, [e.target.name]: e.target.value };
                         });
                       }}
+                      type={
+                        newUserDetails.name === "Password" ? "password" : ""
+                      }
                       placeholder={newUserDetails.name}
                       className="p-2  border-b border-red-500 mb-2 font-Poppins"
                     ></input>

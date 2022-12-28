@@ -34,7 +34,7 @@ export default function Shirts(props: ShirtsProps) {
     // do whatever
     finalArray.push(chunk);
   }
-  console.log("sd", finalArray);
+
   return (
     <div className="bg-white">
       {finalArray.map((item, index) => {
@@ -60,15 +60,14 @@ export default function Shirts(props: ShirtsProps) {
 export async function getServerSideProps(context: any) {
   const { req, query, res, asPath, pathname } = context;
   const host = req.headers.host;
+  console.log(process.env.NEXT_PUBLIC_SERVER_HOST);
   const data: any = await axios
     .get(
-      `http://${process.env.NEXT_PUBLIC_SERVER_HOST}//api/getStoreItems?collection=Shirts`
+      `https://vert-crud-8d3s.vercel.app/api/getStoreItems?collection=Shirts`
     )
     .catch((err) => {
       console.log(err);
     });
-  if (data) {
-    console.log(data.data);
-  }
+
   return { props: { allItems: { data: data.data } } };
 }

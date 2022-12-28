@@ -1,4 +1,5 @@
 import axios, { AxiosError } from "axios";
+import "react-toastify/dist/ReactToastify.css";
 import { useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/useDispatch";
 import Star from "../../public/icons/star";
@@ -45,10 +46,6 @@ export default function Product(props: ProductProps) {
   const userMongoDataRedux = useAppSelector(
     (state) => state.user.value.mongoData
   );
-  console.log(
-    "sdsdsd",
-    useAppSelector((state) => state.cart.value)
-  );
 
   const userLoginState = useAppSelector((state) => state.user.value);
   const loginMenuReduxState = useAppSelector(
@@ -56,24 +53,22 @@ export default function Product(props: ProductProps) {
   );
   const loggedIn: boolean = userLoginState.email && userLoginState.uid;
 
-  console.log(
-    "sd",
-    useAppSelector((state) => state.user.value)
-  );
-
   const removeFromWishlist = async () => {
+    notify(toastId, "Removing from Wishlist");
     const data = await axios
       .put(
-        `http://${
+        `https://${
           process.env.NEXT_PUBLIC_SERVER_HOST
         }/api/customerChanges?email=${userLoginState.email}&Remove=${true}`,
         { item: props.data }
       )
       .catch((err) => {
         console.log(err);
+        ifErrorUpdate(toastId, "An error occured, please check your internet");
       });
     if (data) {
       dispatch(addToMongoDataWishlist(data.data));
+      update(toastId, "Operation Successful");
     }
   };
 
@@ -82,8 +77,6 @@ export default function Product(props: ProductProps) {
         (item: any) => item._id === props.data._id
       )
     : false;
-
-  console.log("sdd", isInMongoData);
 
   const cartButtons = [
     {
@@ -109,7 +102,7 @@ export default function Product(props: ProductProps) {
       if (!loggedIn && !userLoginState.mongoData) {
         const userMongoData: any = await axios
           .get(
-            `http://${process.env.NEXT_PUBLIC_SERVER_HOST}/api/customerChanges?email=${userLoginState.email}`
+            `https://${process.env.NEXT_PUBLIC_SERVER_HOST}/api/customerChanges?email=${userLoginState.email}`
           )
           .catch((err) => {
             console.log(err);
@@ -140,7 +133,7 @@ export default function Product(props: ProductProps) {
         return;
       }
       const data = await axios.put(
-        `http://${process.env.NEXT_PUBLIC_SERVER_HOST}/api/customerChanges?email=${userLoginState.email}`,
+        `https://${process.env.NEXT_PUBLIC_SERVER_HOST}/api/customerChanges?email=${userLoginState.email}`,
         { item: props.data }
       );
 
@@ -192,7 +185,19 @@ export default function Product(props: ProductProps) {
                 >
                   +
                 </button>
-                <button>{Star("24", "24", "fill-red-500")}</button>
+                <button
+                  onClick={async () => {
+                    if (isInMongoData) {
+                      removeFromWishlist();
+                      return;
+                    } else {
+                      addToWishList();
+                    }
+                  }}
+                  className="font-Oswald text-red-500"
+                >
+                  {isInMongoData ? "Remove From WishList" : "Add to WishList"}
+                </button>
                 <button
                   onClick={() => {
                     dispatch(removeFromCart(props.data._id));
@@ -275,8 +280,6 @@ export async function getServerSideProps(context: any) {
     .catch((err) => {
       console.log(err);
     });
-  if (data) {
-    console.log(data.data);
-  }
+
   return { props: { data: data.data } };
 }

@@ -54,7 +54,6 @@ export default function Time(props: ShirtsProps) {
     // do whatever
     finalArray.push(chunk);
   }
-  console.log("sd", finalArray);
 
   const variants = {
     out: {
@@ -86,14 +85,13 @@ export default function Time(props: ShirtsProps) {
             whileInView={{ opacity: 1 }}
             viewport={{ amount: 0.6 }}
             onViewportEnter={() => {
-              console.log(index, "msd");
               setPlace(index);
             }}
             ref={ref}
             initial={{ opacity: 1 }}
             key={index}
             className={`flex items-center justify-around h-screen snap-center snap-always ${
-              index === finalArray.length - 1 ? "" : "mb-12"
+              index === finalArray.length - 1 ? "" : "md:mb-12"
             }`}
           >
             {" "}
@@ -109,7 +107,7 @@ export default function Time(props: ShirtsProps) {
                 >
                   {itemDates.map((item, index) => {
                     if (index === place) {
-                      return <div>{item.name}</div>;
+                      return <div key={index}>{item.name}</div>;
                     }
                   })}
                 </motion.div>
@@ -161,8 +159,6 @@ export async function getServerSideProps(context: any) {
     .catch((err) => {
       console.log(err);
     });
-  if (data) {
-    console.log(data.data);
-  }
+
   return { props: { allItems: { data: data.data } } };
 }

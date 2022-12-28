@@ -36,7 +36,6 @@ export default function Shirts(props: ProductProps) {
 
     finalArray.push(chunk);
   }
-  console.log("sd", finalArray);
 
   for (let i = 0; i < props.allItems.data.length; i += chunkSizeMobile) {
     const chunk = props.allItems.data.slice(i, i + chunkSizeMobile);
@@ -86,7 +85,7 @@ export async function getServerSideProps(context: any) {
   let collectionName: string;
 
   const { req, query, res, asPath, pathname } = context;
-  console.log(query);
+
   switch (query.ITEM) {
     case "SHIRTS": {
       collectionName = "Shirts";
