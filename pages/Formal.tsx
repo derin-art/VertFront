@@ -48,8 +48,6 @@ export async function getServerSideProps(context: any) {
     .catch((err) => {
       console.log(err);
     });
-  if (data) {
-    console.log(data.data);
-  }
+  
   return { props: { allItems: { data: data.data } } };
 }

@@ -30,6 +30,7 @@ export default function ItemLink(props: ItemLinkProps) {
   return (
     <Link
       href={`/products/${props.data._id}`}
+      
       className="flex flex-col items-center justify-center"
     >
       <LazyLoadImage

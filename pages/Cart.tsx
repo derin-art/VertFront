@@ -66,7 +66,6 @@ export default function Cart() {
     grandTotal += item.price * item.quantity;
   });
 
-  console.log("arr", reduceItemsToGetQuantityArray);
 
   const loggedIn: boolean = userLoginState.email && userLoginState.uid;
 
@@ -80,7 +79,7 @@ export default function Cart() {
       return;
     }
     const date = new Date();
-    console.log(date.toLocaleTimeString(), date.toLocaleDateString());
+    
     const newArrayForBougth = reduceItemsToGetQuantityArray.map((item) => {
       return {
         ...item,
@@ -103,7 +102,7 @@ export default function Cart() {
         ifErrorUpdate(toastId, "An error occured, please check your internet");
       });
     if (data) {
-      console.log(data);
+      
       update(toastId, "Purchase Successful!");
       dispatch(clearCart());
     }

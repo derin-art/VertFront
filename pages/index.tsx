@@ -28,7 +28,7 @@ export default function Home() {
     },
     { name: "Email", info: "email us @ vert!@gmail.com" },
   ];
-  /* console.log(useAppSelector((state) => state.cart.value)); */
+  
   return (
     <div className="">
       <motion.div
