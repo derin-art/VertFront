@@ -95,14 +95,14 @@ export default function Mheader() {
   });
 
   const MockLoginIn = async (email: string, password: string) => {
-    if (email) {
+    if (!email) {
       toast.error("Email required for login", {
         ...toastOptions(),
         autoClose: 2000,
       });
       return;
     }
-    if (password) {
+    if (!password) {
       toast.error("Passowrd required for login", {
         ...toastOptions(),
         autoClose: 2000,
