@@ -28,7 +28,7 @@ export default function Home() {
     },
     { name: "Email", info: "email us @ vert!@gmail.com" },
   ];
-  
+
   return (
     <div className="">
       <motion.div
@@ -60,7 +60,7 @@ export default function Home() {
 
       <Collection></Collection>
       <Varsity></Varsity>
-      <div className="h-screen bg-white flex items-center justify-center snapChild">
+      <div className="h-screen bg-white flex items-center justify-center md:snap-center">
         <div className="w-10/12  h-3/4 hidden md:block relative flex justify-end text-right p-8">
           <div className=" w-fit font-Berk absolute left-4 line-through lg:text-[150px] md:text-[100px] text-[100px] xl:text-[250px] text-gray-200">
             VERT
