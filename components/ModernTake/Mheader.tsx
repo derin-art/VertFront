@@ -517,7 +517,7 @@ export default function Mheader() {
             <div className="absolute text-red-500 font-PlayI bottom-10 text-3xl">
               Vert
             </div>
-            <div className="absolute text-black font-Oswald top-4 text-lg md:text-xl flex flex-col">
+            <div className="absolute text-black font-Oswald top-4 z-10 text-lg md:text-xl flex flex-col">
               <button
                 onClick={() => {
                   dispatch(setOpenLoginRedux());
@@ -529,7 +529,7 @@ export default function Mheader() {
               {newUser ? "Login" : "Create a new User"}
             </div>
             {newUser ? (
-              <div className="flex flex-col items-center justify-center">
+              <div className="flex flex-col items-center justify-center ">
                 {dataForLogin.map((loginDetails) => {
                   return (
                     <input
@@ -542,7 +542,7 @@ export default function Mheader() {
                       }}
                       type={loginDetails.name === "Password" ? "password" : ""}
                       placeholder={loginDetails.name}
-                      className="p-2  border-b border-red-500 mb-2 font-Poppins"
+                      className="p-2  border-b border-red-500 mb-2 font-Poppins max-w-[200px] z-30"
                     ></input>
                   );
                 })}
@@ -583,7 +583,7 @@ export default function Mheader() {
                         newUserDetails.name === "Password" ? "password" : ""
                       }
                       placeholder={newUserDetails.name}
-                      className="p-2  border-b border-red-500 mb-2 font-Poppins"
+                      className="p-2  border-b border-red-500 mb-2 font-Poppins max-w-[200px] z-30"
                     ></input>
                   );
                 })}

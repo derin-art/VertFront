@@ -63,7 +63,7 @@ export default function Collection() {
         collectionBool ? "bg-white" : "bg-black"
       } relative flex overflow-x-hidden duration-300 items-end snapChild justify-start border-b border-black`}
     >
-      <div className="flex font-SecFont w-full text-[80px] lg:text-[120px]  xl:text-[150px] absolute  self-start mt-14 text-red-500">
+      <div className="md:flex font-SecFont w-full text-[50px] hidden md:text-[80px] lg:text-[90px] xl:text-[130px]  2xl:text-[150px] absolute  self-start mt-14 text-red-500">
         <motion.div
           initial={{
             opacity: 0,
@@ -97,11 +97,25 @@ export default function Collection() {
           }}
           transition={{ duration: 0.8, delay: 0.1 }}
           viewport={{ once: false }}
-          className="absolute -left-[300px] "
+          className="absolute -left-[300px] hidden 2xl:block"
         >
           Collections
         </motion.div>
       </div>
+
+      <motion.div className="mt-14 w-full absolute text-red-500 font-PlayFair md:hidden flex top-20 text-6xl">
+        <motion.div className="text-red-500">
+          {" "}
+          <motion.span
+            className={`font-PlayI  ${
+              collectionBool ? "text-AltBlack" : "text-white"
+            }`}
+          >
+            Timeless
+          </motion.span>{" "}
+          Collections
+        </motion.div>
+      </motion.div>
 
       <motion.div
         initial={{

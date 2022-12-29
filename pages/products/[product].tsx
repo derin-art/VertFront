@@ -173,7 +173,7 @@ export default function Product(props: ProductProps) {
           ></LazyLoadImage>
         </div>
 
-        <div className="h-1/6 w-full text-black bg-white border absolute bottom-0 rounded-t-[60px] md:hidden ">
+        <div className="h-1/6 w-full text-black bg-white border-t border-x absolute bottom-0 rounded-t-[60px] md:hidden ">
           <div>
             <div className="mt-2 flex flex-col items-center justify-center">
               <div className="flex justify-around w-full mb-2">
