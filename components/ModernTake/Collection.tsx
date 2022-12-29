@@ -61,7 +61,7 @@ export default function Collection() {
     <div
       className={`h-screen ${
         collectionBool ? "bg-white" : "bg-black"
-      } relative flex overflow-x-hidden duration-300 items-end snapChild justify-start border-b border-black`}
+      } relative flex md:overflow-x-hidden duration-300 items-end md:snap-center justify-start border-b border-black`}
     >
       <div className="md:flex font-SecFont w-full text-[50px] hidden md:text-[80px] lg:text-[90px] xl:text-[130px]  2xl:text-[150px] absolute  self-start mt-14 text-red-500">
         <motion.div
