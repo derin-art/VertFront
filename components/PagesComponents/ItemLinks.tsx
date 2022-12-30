@@ -30,16 +30,16 @@ export default function ItemLink(props: ItemLinkProps) {
   return (
     <Link
       href={`/products/${props.data._id}`}
-      
       className="flex flex-col items-center justify-center"
     >
-      <LazyLoadImage
+      <Image
         className="md:h-[300px] md:w-[220px] h-[180px] w-[132px] object-cover  shadow-md"
         src={props.data.urls[0].imgUrl}
         alt={props.data.name}
-        loading="lazy"
-        placeholderSrc={props.data.urls[0].blurUrl}
-      ></LazyLoadImage>
+        height={300}
+        width={220}
+        priority
+      ></Image>
       <div className="mt-4 max-w-[220px] flex flex-col items-center justify-center">
         <div className="font-PlayI bg-black text-white p-1 text-center text-xs w-fit px-4">
           ${props.data.price}
