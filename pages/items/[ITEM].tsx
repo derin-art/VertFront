@@ -86,6 +86,11 @@ export async function getServerSideProps(context: any) {
 
   const { req, query, res, asPath, pathname } = context;
 
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=300, stale-while-revalidate=600"
+  );
+
   switch (query.ITEM) {
     case "SHIRTS": {
       collectionName = "Shirts";
@@ -113,6 +118,9 @@ export async function getServerSideProps(context: any) {
     .catch((err) => {
       console.log(err);
     });
+  if (data) {
+    console.log(data);
+  }
 
   return { props: { allItems: { data: data.data } } };
 }
