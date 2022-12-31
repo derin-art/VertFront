@@ -40,7 +40,7 @@ export default function Risque(props: ProductProps) {
   );
 }
 
-export async function getServerSideProps(context: any) {
+export async function getStaticProps(context: any) {
   const data: any = await axios
     .get(
       `http://${process.env.NEXT_PUBLIC_SERVER_HOST}//api/getStoreItems?collection=NightLife`

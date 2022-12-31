@@ -61,9 +61,7 @@ export default function Future(props: ShirtsProps) {
   );
 }
 
-export async function getServerSideProps(context: any) {
-  const { req, query, res, asPath, pathname } = context;
-  const host = req.headers.host;
+export async function getStaticProps(context: any) {
   const data: any = await axios
     .get(
       `http://${process.env.NEXT_PUBLIC_SERVER_HOST}//api/getStoreItems?collection=Future`
@@ -71,6 +69,6 @@ export async function getServerSideProps(context: any) {
     .catch((err) => {
       console.log(err);
     });
- 
+
   return { props: { allItems: { data: data.data } } };
 }
