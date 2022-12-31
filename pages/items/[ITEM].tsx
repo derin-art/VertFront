@@ -1,5 +1,6 @@
 import axios from "axios";
 import { type } from "os";
+import { QueryClient, useQuery } from "react-query";
 
 import ItemLinks from "../../components/PagesComponents/ItemLinks";
 
@@ -81,17 +82,21 @@ export default function Shirts(props: ProductProps) {
   );
 }
 
-export async function getServerSideProps(context: any) {
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { ITEM: "SHIRTS" } },
+      { params: { ITEM: "JACKETS" } },
+      { params: { ITEM: "T-SHIRTS" } },
+    ],
+    fallback: false, // can also be true or 'blocking'
+  };
+}
+
+export async function getStaticProps({ params }: any) {
   let collectionName: string;
 
-  const { req, query, res, asPath, pathname } = context;
-
-  res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=300, stale-while-revalidate=600"
-  );
-
-  switch (query.ITEM) {
+  switch (params.ITEM) {
     case "SHIRTS": {
       collectionName = "Shirts";
       break;
@@ -110,7 +115,7 @@ export async function getServerSideProps(context: any) {
       );
     }
   }
-  const host = req.headers.host;
+
   const data: any = await axios
     .get(
       `http://${process.env.NEXT_PUBLIC_SERVER_HOST}//api/getStoreItems?collection=${collectionName}`
