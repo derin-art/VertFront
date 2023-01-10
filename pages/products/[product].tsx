@@ -1,23 +1,14 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
+import Image from "next/image";
 import { useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/useDispatch";
 import Star from "../../public/icons/star";
-import CartIcon from "../../public/icons/cartIcon";
-import {
-  increment,
-  decrement,
-  addToCart,
-  removeFromCart,
-} from "../../Features/cartSlice";
-import {
-  setOpenLoginRedux,
-  setOpenLoginReduxSet,
-} from "../../Features/authSlice";
+import { addToCart, removeFromCart } from "../../Features/cartSlice";
+import { setOpenLoginRedux } from "../../Features/authSlice";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { login, addToMongoDataWishlist } from "../../Features/authSlice";
 import { ifErrorUpdate, notify, update } from "../../hooks/useToastPopup";
-import { async } from "@firebase/util";
 
 type ProductProps = {
   data: {
@@ -164,13 +155,15 @@ export default function Product(props: ProductProps) {
             </div>
           )}
 
-          <LazyLoadImage
+          <Image
             className="md:h-[450px] md:w-[330px] h-[400px] object-cover  shadow-md "
             loading="lazy"
             alt={props.data.name}
             src={props.data.urls[0].imgUrl}
-            placeholderSrc={props.data.urls[0].blurUrl}
-          ></LazyLoadImage>
+            height={450}
+            width={330}
+            unoptimized={true}
+          ></Image>
         </div>
 
         <div className="h-1/6 w-full text-black bg-white border-t border-x absolute bottom-0 rounded-t-[60px] md:hidden ">
@@ -271,12 +264,25 @@ export default function Product(props: ProductProps) {
   );
 }
 
-export async function getServerSideProps(context: any) {
-  const { req, query, res, asPath, pathname } = context;
-  const id = query.product;
-
+export async function getStaticPaths() {
   const data: any = await axios
-    .get(`http://${process.env.NEXT_PUBLIC_SERVER_HOST}//api/editItem?id=${id}`)
+    .get(`http://${process.env.NEXT_PUBLIC_SERVER_HOST}//api/Images`)
+    .catch((err) => {
+      console.log(err);
+    });
+  return {
+    paths: data.data.map((item: any) => {
+      return { params: { product: item._id } };
+    }),
+    fallback: false, // can also be true or 'blocking'
+  };
+}
+
+export async function getStaticProps({ params }: any) {
+  const data: any = await axios
+    .get(
+      `http://${process.env.NEXT_PUBLIC_SERVER_HOST}//api/editItem?id=${params.product}`
+    )
     .catch((err) => {
       console.log(err);
     });

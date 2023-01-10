@@ -399,3 +399,8 @@ a {
     clip: rect(67px, 9999px, 122px, 0);
   }
 }
+
+#nprogress .bar {
+  background: #ff0101 !important;
+  height: 3px !important;
+}

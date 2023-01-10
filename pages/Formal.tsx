@@ -40,7 +40,7 @@ export default function Formal(props: ProductProps) {
   );
 }
 
-export async function getServerSideProps(context: any) {
+export async function getStaticProps(context: any) {
   const data: any = await axios
     .get(
       `http://${process.env.NEXT_PUBLIC_SERVER_HOST}//api/getStoreItems?collection=Formal`
@@ -48,6 +48,6 @@ export async function getServerSideProps(context: any) {
     .catch((err) => {
       console.log(err);
     });
-  
+
   return { props: { allItems: { data: data.data } } };
 }

@@ -7,10 +7,10 @@ import { useState } from "react";
 import { type } from "os";
 
 type AltMainPageProps = {
-  other?: boolean;
+  toastId: any;
 };
 
-export default function AltMainPage() {
+export default function AltMainPage(props: AltMainPageProps) {
   const [openTimeLine, setOpenTimeLine] = useState(true);
   const borderSol = [1, 2, 3, 4, 5, 6];
   return (
@@ -40,7 +40,10 @@ export default function AltMainPage() {
         viewport={{ once: false }}
         className="h-5/6 mt-[91px] flex items-center justify-center relative "
       >
-        <AltMainCenter openTimeLine={openTimeLine}></AltMainCenter>
+        <AltMainCenter
+          toastId={props.toastId}
+          openTimeLine={openTimeLine}
+        ></AltMainCenter>
       </motion.div>
     </div>
   );

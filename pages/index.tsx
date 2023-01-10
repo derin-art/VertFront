@@ -1,9 +1,4 @@
-import Head from "next/head";
-import Image from "next/image";
-import AltPage from "../components/AltPage";
 import styles from "../styles/Home.module.css";
-import MainPageTest from "../components/MainPageTest";
-import Star from "../public/icons/star";
 
 import AltMainPage from "../components/AltMainPage";
 import CopyIcon from "../public/icons/copyIcon";
@@ -11,14 +6,15 @@ import CopyIcon from "../public/icons/copyIcon";
 import { motion } from "framer-motion";
 
 import Collection from "../components/ModernTake/Collection";
-import AnotherMain from "../components/ModernTake/AnotherMain";
-import { useState } from "react";
+
+import { useState, useRef } from "react";
 import Varsity from "../components/ModernTake/Varsity";
-import { increment } from "../Features/cartSlice";
+
 import { useAppDispatch, useAppSelector } from "../hooks/useDispatch";
 
 export default function Home() {
   const [other, setOther] = useState(true);
+  const toastId = useRef(null);
   const dispatch = useAppDispatch();
   const footerInfo = [
     { name: "Contact", info: ["08182880022", "+1299020200"] },
@@ -47,19 +43,11 @@ export default function Home() {
         className="sna"
         viewport={{ once: false }}
       >
-        <AltMainPage></AltMainPage>
-        <button
-          className="hidden"
-          onClick={() => {
-            dispatch(increment());
-          }}
-        >
-          sd
-        </button>
+        <AltMainPage toastId={toastId}></AltMainPage>
       </motion.div>
 
-      <Collection></Collection>
-      <Varsity></Varsity>
+      <Collection toastId={toastId}></Collection>
+      <Varsity toastId={toastId}></Varsity>
       <div className="h-screen bg-white flex items-center justify-center md:snap-center">
         <div className="w-10/12  h-3/4 hidden md:block relative flex justify-end text-right p-8">
           <div className=" w-fit font-Berk absolute left-4 line-through lg:text-[150px] md:text-[100px] text-[100px] xl:text-[250px] text-gray-200">
