@@ -8,14 +8,19 @@ import X2 from "../../public/TestImages/X2.jpg";
 import Test3 from "../../public/TestImages/Test3.jpg";
 import L1 from "../../public/TestImages/L1.jpg";
 import B1 from "../../public/TestImages/B44.png";
-import { useState } from "react";
+import { update, ifErrorUpdate, notify } from "../../hooks/useToastPopup";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/useDispatch";
 import {
   changeCollectionBool,
   changeCollectionBooltoFalse,
 } from "../../Features/collectionAnimSlice";
 
-export default function Collection() {
+type CollectionProps = {
+  toastId: any;
+};
+
+export default function Collection(props: CollectionProps) {
   const [other, setOther] = useState(false);
   const [other2, setOther2] = useState(false);
   const collectionBool = useAppSelector((state) => state.collection.value);

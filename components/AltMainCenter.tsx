@@ -10,6 +10,7 @@ import Link from "next/link";
 type AltMainCenterProps = {
   openTimeLine: boolean;
   other?: boolean;
+  toastId: any;
 };
 
 export default function AltMainCenter(props: AltMainCenterProps) {

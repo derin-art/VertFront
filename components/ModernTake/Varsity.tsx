@@ -2,9 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import Var from "../../public/TestImages/VAR2.png";
 import useMediaQuery from "../../hooks/useMediaQuery";
-import { useState } from "react";
 
-export default function Varsity() {
+import { useState } from "react";
+import { type } from "os";
+
+type VarsityProps = {
+  toastId: any;
+};
+
+export default function Varsity(props: VarsityProps) {
   const allText = [{ text: "V" }, { text: "FOR" }, { text: "VARSITY" }];
   const [isMouseOverExplore, setMouseIsOverExplore] = useState(false);
   return (
