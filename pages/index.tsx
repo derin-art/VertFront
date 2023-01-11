@@ -1,4 +1,5 @@
 import styles from "../styles/Home.module.css";
+import useMediaQuery from "../hooks/useMediaQuery";
 
 import AltMainPage from "../components/AltMainPage";
 import CopyIcon from "../public/icons/copyIcon";
@@ -13,6 +14,10 @@ import Varsity from "../components/ModernTake/Varsity";
 import { useAppDispatch, useAppSelector } from "../hooks/useDispatch";
 
 export default function Home() {
+  const { height, width } = useMediaQuery();
+
+  const isMobileScreen = width ? width < 640 : true;
+
   const [other, setOther] = useState(true);
   const toastId = useRef(null);
   const dispatch = useAppDispatch();
@@ -28,20 +33,25 @@ export default function Home() {
   return (
     <div className="">
       <motion.div
-        initial={{
-          opacity: 0,
-          scale: 0.7,
-        }}
+        initial={
+          !isMobileScreen
+            ? {
+                opacity: 0,
+                scale: 0.7,
+              }
+            : { opacity: 1, scale: 1 }
+        }
         whileInView={{
           opacity: 1,
           scale: 1,
         }}
         onAnimationComplete={() => {
+          if (isMobileScreen) return;
           setOther((prev) => !prev);
         }}
         transition={{ duration: 0.8 }}
         className="sna"
-        viewport={{ once: false }}
+        viewport={!isMobileScreen ? { once: false } : { once: true }}
       >
         <AltMainPage toastId={toastId}></AltMainPage>
       </motion.div>
@@ -54,15 +64,13 @@ export default function Home() {
             VERT
           </div>
         </div>
-        <div className="absolute text-gray-200 text-6xl rotate-90 left-0 font-Poppins md:hidden">
-          VE<span className="text-black">®</span>T
-        </div>
-        <div className="flex flex-col h-5/6 justify-center   w-2/12 mt-12 space-y-2">
+
+        <div className="flex flex-col lg:h-5/6 h-full justify-center w-4/5  lg:w-2/12 mt-12 space-y-8">
           {footerInfo.map((item, index) => {
             return (
               <div
                 key={item.name}
-                className={` relative border-red-500 group cursor-pointer font-Poppins text-xs border-r-0 text-red-500 h-1/3 w-full  flex justify-center flex-col p-2`}
+                className={` relative border-red-500 group cursor-pointer font-Poppins text-xs border-r-0 text-red-500 lg:h-1/3 w-full  flex justify-center flex-col p-2`}
               >
                 {CopyIcon("group-hover:opacity-100 opacity-0 duration-300")}
                 <div className="font-Oswald text-xl z-30 ">{item.name}</div>

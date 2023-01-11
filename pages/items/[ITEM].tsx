@@ -44,7 +44,7 @@ export default function Shirts(props: ProductProps) {
     finalArrayMobile.push(chunk);
   }
   return (
-    <div className="bg-white">
+    <div className="bg-white lg:p-0 py-20">
       {finalArray.map((item, index) => {
         return (
           <div
@@ -66,11 +66,12 @@ export default function Shirts(props: ProductProps) {
         return (
           <div
             key={index}
-            className="flex items-center justify-around h-screen md:hidden flex snapChild"
+            style={{ height: "50vh" }}
+            className="flex items-center justify-around   md:hidden flex "
           >
             {item.map((product) => {
               return (
-                <div className=" z-10 " key={product._id}>
+                <div className=" z-10 p-2" key={product._id}>
                   <ItemLinks key={product._id} data={product}></ItemLinks>
                 </div>
               );
