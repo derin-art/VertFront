@@ -108,7 +108,7 @@ export default function Collection(props: CollectionProps) {
         </motion.div>
       </div>
 
-      <motion.div className="mt-14 w-full absolute text-red-500 font-PlayFair md:hidden flex top-20 text-6xl">
+      <motion.div className="mt-14 w-full absolute text-red-500 font-PlayFair hidden flex top-4 text-5xl left-2">
         <motion.div className="text-red-500">
           {" "}
           <motion.span
@@ -138,7 +138,27 @@ export default function Collection(props: CollectionProps) {
         viewport={{ once: false }}
         className="flex w-full items-center justify-center h-full"
       >
-        <motion.div className="lg:mt-[123px] mt-[74px] flex  sm:flex-row">
+        <div className="flex flex-col space-y-4 lg:hidden">
+          <div
+            className={`font-Berk text-2xl  ${
+              collectionBool ? "text-AltBlack" : "text-white"
+            }`}
+          >
+            TimeLess Collections
+          </div>
+          {images.map((item, index) => {
+            return (
+              <Link
+                className="text-red-500 font-Berk text-lg "
+                href={`/${item.name}`}
+                key={index}
+              >
+                {item.name === "Risque" ? "NightLife" : item.name}
+              </Link>
+            );
+          })}
+        </div>
+        <motion.div className="lg:mt-[123px] mt-[74px] lg:flex  sm:flex-row hidden">
           {images.map((item, index) => {
             return (
               <Link href={`/${item.name}`} className="mb-6" key={index}>

@@ -127,8 +127,8 @@ export default function AltMainCenter(props: AltMainCenterProps) {
                         className="group "
                       >
                         {" "}
-                        <div className="absolute top-0 h-1/4 group-hover:text-red-500  text-white  text-base flex items-center justify-center text-center font-Oswald w-[150px] md:w-[190px]">
-                          <div className="w-3/4 duration-300 bg-black items-center flex justify-center text-xs border-red-500">
+                        <div className="absolute top-0 h-1/4 group-hover:text-red-500  text-white  text-base flex items-center justify-center text-center font-Oswald w-[140px] md:w-[190px]">
+                          <div className="w-full  duration-300 bg-black items-center flex justify-center text-xs border-red-500">
                             {index === 0 ? (
                               <div>Vert Futures Project</div>
                             ) : (
@@ -142,7 +142,7 @@ export default function AltMainCenter(props: AltMainCenterProps) {
                           height="295"
                           width="190"
                           unoptimized={true}
-                          className={` z-30 border-red-500 sm:mr-24   w-[150px] md:object-cover md:h-[295px] md:w-[190px]`}
+                          className={` z-30 border-red-500 sm:mr-24   w-[140px] md:object-cover md:h-[295px] md:w-[190px]`}
                           alt="TestImage"
                         ></Image>
                       </motion.div>

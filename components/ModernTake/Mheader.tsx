@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
+import useMediaQuery from "../../hooks/useMediaQuery";
 import firebaseApp from "../../pages/api/firebase";
 import {
   update,
@@ -295,6 +296,10 @@ export default function Mheader() {
 
   const isOn = !isOnRisque && !collectionBool;
 
+  const { height, width } = useMediaQuery();
+
+  const isMobileScreen = width ? width < 640 : true;
+
   return (
     <div className="">
       <ToastContainer></ToastContainer>
@@ -475,8 +480,8 @@ export default function Mheader() {
               {otherLinks.map((item, index) => {
                 return (
                   <motion.div
-                    initial={{ x: -400 }}
-                    animate={{ x: 0 }}
+                    initial={!isMobileScreen ? { x: -400 } : { x: 0 }}
+                    animate={!isMobileScreen ? { x: 0 } : {}}
                     transition={{
                       duration: 0.3,
                       delay: index * 0.15,

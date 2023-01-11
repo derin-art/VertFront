@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
-import Image from "next/image";
-import Center1 from "../public/TestImages/Center1.jpg";
-import TimeLineIcon from "../public/icons/timeLineIcon";
+import useMediaQuery from "../hooks/useMediaQuery";
 import AltMainCenter from "./AltMainCenter";
 import { useState } from "react";
 import { type } from "os";
@@ -11,6 +9,9 @@ type AltMainPageProps = {
 };
 
 export default function AltMainPage(props: AltMainPageProps) {
+  const { height, width } = useMediaQuery();
+
+  const isMobileScreen = width ? width < 640 : true;
   const [openTimeLine, setOpenTimeLine] = useState(true);
   const borderSol = [1, 2, 3, 4, 5, 6];
   return (
@@ -37,7 +38,7 @@ export default function AltMainPage(props: AltMainPageProps) {
           marginTop: 91,
         }}
         transition={{ duration: 0.8 }}
-        viewport={{ once: false }}
+        viewport={!isMobileScreen ? { once: false } : { once: true }}
         className="h-5/6 mt-[91px] flex items-center justify-center relative "
       >
         <AltMainCenter
