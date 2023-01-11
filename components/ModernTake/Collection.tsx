@@ -49,8 +49,6 @@ export default function Collection(props: CollectionProps) {
       by: "giancoo galdi",
       model: "micheal masz",
     },
-
-    { name: "Jewerly", img: B1 },
   ];
 
   const variants = {
