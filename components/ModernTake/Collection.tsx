@@ -136,9 +136,9 @@ export default function Collection(props: CollectionProps) {
         viewport={{ once: false }}
         className="flex w-full items-center justify-center h-full"
       >
-        <div className="flex flex-col space-y-4 lg:hidden">
+        <div className="flex flex-col space-y-6 lg:hidden p-6">
           <div
-            className={`font-Berk text-2xl  ${
+            className={`font-Berk text-4xl  ${
               collectionBool ? "text-AltBlack" : "text-white"
             }`}
           >
@@ -147,7 +147,7 @@ export default function Collection(props: CollectionProps) {
           {images.map((item, index) => {
             return (
               <Link
-                className="text-red-500 font-Berk text-lg "
+                className="text-red-500 font-Berk text-3xl border-b border-red-500 p-1"
                 href={`/${item.name}`}
                 key={index}
               >

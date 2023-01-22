@@ -50,7 +50,7 @@ export default function Home() {
           setOther((prev) => !prev);
         }}
         transition={{ duration: 0.8 }}
-        className="sna"
+        className="sna border-b border-black"
         viewport={!isMobileScreen ? { once: false } : { once: true }}
       >
         <AltMainPage toastId={toastId}></AltMainPage>
