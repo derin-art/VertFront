@@ -304,7 +304,7 @@ export default function Mheader() {
     <div className="">
       <ToastContainer></ToastContainer>
       <div
-        className={`w-full font-Poppins text-xs fixed p-6 pl-2 md:p-0 flex duration-300 items-center ${
+        className={`w-full font-Inter text-xs fixed p-6 pl-2 md:p-0 flex duration-300 items-center ${
           collectionOpen || loginReduxState ? "z-[100]" : "z-30"
         }  ${
           !isOnRisque
