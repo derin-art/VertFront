@@ -73,7 +73,7 @@ export default function Auto(props: AutoPropsType) {
           );
         })}
       </AutoPlaySwipeableViews>
-      <div className="flex space-x-8 absolute bottom-4 ">
+      <div className="flex space-x-8 absolute bottom-10 ">
         {autoPlayArray.map((item, indexA) => {
           return (
             <button

@@ -41,26 +41,26 @@ export default function Home() {
 
   const backGrounds = [
     {
-      bg: "bg-[url('../public/TestImages/J.jpg')] bg-center",
+      bg: "bg-[url('../public/TestImages/NightlifeNoiseFinal.jpg')] bg-center",
       button: "Formal",
       name: "Nigthlife",
       Night: true,
     },
     {
-      bg: "bg-[url('../public/TestImages/LL1.jpg')]",
+      bg: "bg-[url('../public/TestImages/JacketNoise1.jpg')]",
       button: "NightLife",
       name: "Jackets",
     },
     { auto: true, component: true },
 
     {
-      bg: "bg-[url('../public/TestImages/A61.jpg')] ",
+      bg: "bg-[url('../public/TestImages/FormalBgNoise.jpg')] ",
       button: "",
       name: "Formal",
     },
 
     {
-      bg: "bg-[url('../public/TestImages/A9.png')] bg-bottom",
+      bg: "bg-[url('../public/TestImages/Footer2.jpg')] bg-bottom",
       button: "",
       footer: true,
     },
@@ -124,7 +124,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="h-screen  flex-col items-center justify-end flex p-20 bg-top bg-[url('../public/TestImages/M.jpg')] w-full object-none bg-cover">
+      <div className="h-screen  flex-col items-center justify-end flex p-20 bg-top bg-[url('../public/TestImages/HomeLaptopN.jpg')]  lg:bg-[url('../public/TestImages/HomeLaptopN.jpg')] w-full object-none bg-cover">
         <div className="text-red-500 font-Berk text-6xl">VERT</div>
         <div className="text-red-500 font-Poppins text-center text-xs ">
           EST.
@@ -150,16 +150,14 @@ export default function Home() {
           return (
             <div
               key={item.bg}
-              className={`h-screen flex-col items-center ${item.bg} justify-center flex p-8  w-full object-none bg-cover relative`}
+              className={`h-screen flex-col items-center ${item.bg} justify-center flex   w-full object-none bg-cover relative`}
             >
-              <div className="font-Berk text-red-500 text-lg">{item.name}</div>
+              <button className="border p-2 text-red-500 border-red-500 bg-black  font-Inter  flex items-center justify-center  text-[10px] absolute bottom-20 left-4">
+                Shop {item.name ? item.name : ""}{" "}
+                {BagIcon("fill-red-500 ml-2", "15", "15")}
+              </button>
 
-              <div className="">
-                <button className="border p-2 text-white border-red-500  font-Inter bg-black flex items-center justify-center  text-[10px] absolute left-4 bottom-4 ">
-                  Shop {item.name ? item.name : ""}{" "}
-                  {BagIcon("fill-red-500 ml-2", "15", "15")}
-                </button>
-              </div>
+              <div className=""></div>
             </div>
           );
         }
