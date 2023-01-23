@@ -109,7 +109,7 @@ export default function Cart() {
   return (
     <div className="flex items-center justify-center pt-20  h-screen relative overflow-hidden bg-white text-black">
       <div className=" md:p-4 p-2 w-full  md:w-4/5 h-full">
-        <div className="font-Oswald text-red-500 text-sm ml-2 -mt-2">Cart</div>
+        <div className="font-Inter text-red-500 text-sm ml-2 -mt-2">Cart</div>
         <div className="flex md:flex-row flex-col w-full h-full">
           <div className="flex flex-col w-full md:w-3/4 h-96  md:h-4/5 overflow-auto z-30 p-2">
             {reduceItemsToGetQuantityArray.length > 0 ? (
@@ -121,7 +121,7 @@ export default function Cart() {
                 );
               })
             ) : (
-              <div className="font-Oswald text-lg">Wow, such empty. 😺</div>
+              <div className="font-Inter text-lg">Wow, such empty. 😺</div>
             )}
           </div>
           <div className="md:flex flex-col z-30 text-4xl items-center w-1/4 hidden  h-4/5 font-Oswald border-l border-black">
@@ -131,13 +131,13 @@ export default function Cart() {
               onClick={() => {
                 checkOutRequest();
               }}
-              className="mt-20 font-Poppins border border-black text-white bg-red-500 p-2 text-sm z-30"
+              className="mt-20 font-Inter border border-black text-white bg-red-500 p-2 text-sm z-30"
             >
               Check Out
             </button>
           </div>
-          <div className="h-2/4 w-full flex items-center  flex-col text-black bg-white border z-30 absolute left-0 -bottom-1/3 rounded-t-[60px] md:hidden">
-            <div className="text-black font-Oswald">Grand Total</div>
+          <div className="h-2/4 w-full flex items-center  flex-col text-black bg-white border z-30 absolute left-0 -bottom-1/3 border-t md:hidden">
+            <div className="text-black font-Inter">Grand Total</div>
             <div className="font-PlayI ">${grandTotal}</div>
             <button
               onClick={() => {

@@ -7,7 +7,6 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        HeadFont: ["HeadFont", "serif"],
         SecFont: ["SecFont", "serif"],
         Berk: ["Berk", "serif"],
         Poppins: ["Poppins", "serif"],
@@ -19,6 +18,7 @@ module.exports = {
         Oswald: ["Oswald", "serif"],
         Grad: ["Grad", "serif"],
         Abril: ["Abril", "serif"],
+        Inter: ["Inter", "sans"],
       },
       colors: {
         MikYellow: "#FEC601",

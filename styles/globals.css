@@ -32,11 +32,6 @@ a {
 }
 
 @font-face {
-  font-family: HeadFont;
-  src: url("../public/font/Goblin_One/GoblinOne-Regular.ttf");
-}
-
-@font-face {
   font-family: SecFont;
   src: url("../public/font/Marcellus/Marcellus-Regular.ttf");
 }
@@ -89,6 +84,11 @@ a {
 @font-face {
   font-family: Abril;
   src: url("../public/font/Abril_Fatface/AbrilFatface-Regular.ttf");
+}
+
+@font-face {
+  font-family: Inter;
+  src: url("../public/font/Inter/Inter-VariableFont_slnt\,wght.ttf");
 }
 
 .snapCont {
@@ -403,4 +403,8 @@ a {
 #nprogress .bar {
   background: #ff0101 !important;
   height: 3px !important;
+}
+
+.behindImage {
+  mix-blend-mode: difference;
 }

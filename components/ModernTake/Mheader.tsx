@@ -341,7 +341,7 @@ export default function Mheader() {
                       setCollectionOpen(false);
                     }
                   }}
-                  className={`md:mr-8  h-full z-50 md:p-6    hover:text-red-500 duration-300`}
+                  className={`md:mr-8  h-full z-50 md:p-6 text-white behindImage   hover:text-red-500 duration-300`}
                 >
                   {item === "items" ? (
                     item
@@ -373,7 +373,7 @@ export default function Mheader() {
                       setCollectionOpen(false);
                     }
                   }}
-                  className={`md:mr-8 h-full z-50  md:p-6 hover:text-red-500 duration-300`}
+                  className={`md:mr-8 h-full z-50 text-white behindImage  md:p-6 hover:text-red-500 duration-300`}
                 >
                   {item === "items" ? (
                     item
@@ -517,17 +517,17 @@ export default function Mheader() {
           loginReduxState ? "z-40" : "z-[0]"
         }`}
       >
-        <div className="absolute h-screen mt-10  w-screen top-0 flex  flex-col items-center justify-center ">
-          <div className="-mt-10 crossBackGround rounded-lg shadow-md w-4/5 h-4/5 lg:w-2/5 lg:h-3/5 bg-white border border-black flex flex-col items-center justify-center  blur-none">
+        <div className="absolute h-screen mt-0 lg:mt-10  w-screen top-0 flex  flex-col items-center justify-center ">
+          <div className=" crossBackGround lg:rounded-lg shadow-md w-full h-full lg:w-2/5 lg:h-3/5 bg-white border border-black flex flex-col items-center justify-center  blur-none">
             <div className="absolute text-red-500 font-PlayI bottom-10 text-3xl">
               Vert
             </div>
-            <div className="absolute text-black font-Oswald top-4 z-10 text-lg md:text-xl flex flex-col">
+            <div className="absolute text-black font-Oswald  z-10 text-lg md:text-xl flex flex-col top-16">
               <button
                 onClick={() => {
                   dispatch(setOpenLoginRedux());
                 }}
-                className="font-Poppins text-red-500 hover:text-red-700 duration-300"
+                className="font-Poppins text-red-500 hover:text-red-700 duration-300 hidden lg:block"
               >
                 x
               </button>
@@ -547,7 +547,7 @@ export default function Mheader() {
                       }}
                       type={loginDetails.name === "Password" ? "password" : ""}
                       placeholder={loginDetails.name}
-                      className="p-2  border-b border-red-500 mb-2 font-Poppins max-w-[200px] z-30"
+                      className="p-2  border-b border-red-500 mb-2 font-Inter max-w-[200px] z-30"
                     ></input>
                   );
                 })}
@@ -555,7 +555,7 @@ export default function Mheader() {
                   onClick={() => {
                     LoginIn();
                   }}
-                  className="mt-4 border border-black p-2 font-Poppins text-sm"
+                  className="mt-4 border border-black p-2 font-Inter text-sm"
                 >
                   Login
                 </button>
@@ -563,7 +563,7 @@ export default function Mheader() {
                   onClick={() => {
                     MockLoginIn("chris3@gmail.com", "password1");
                   }}
-                  className="text-xs w-4/5 mt-2 font-Poppins"
+                  className="text-xs w-4/5 mt-2 font-Inter"
                 >
                   Don't want to create yet another fake account to checkout a
                   project? Click here to login with a mock account
@@ -588,7 +588,7 @@ export default function Mheader() {
                         newUserDetails.name === "Password" ? "password" : ""
                       }
                       placeholder={newUserDetails.name}
-                      className="p-2  border-b border-red-500 mb-2 font-Poppins max-w-[200px] z-30"
+                      className="p-2  border-b border-red-500 mb-2 font-Inter max-w-[200px] z-30"
                     ></input>
                   );
                 })}
@@ -596,7 +596,7 @@ export default function Mheader() {
                   onClick={() => {
                     CreateUser();
                   }}
-                  className="mt-4 border border-black p-2 font-Poppins text-sm"
+                  className="mt-4 border border-black p-2 font-Inter text-sm"
                 >
                   Create Account
                 </button>
@@ -606,7 +606,7 @@ export default function Mheader() {
               onClick={() => {
                 setNewUser((prev) => !prev);
               }}
-              className="mt-4 text-xs font-Poppins hover:text-red-500 duration-300"
+              className="mt-4 text-xs font-Inter hover:text-red-500 duration-300"
             >
               {newUser ? "New User?" : "I'm familiar with your game."}
             </button>
