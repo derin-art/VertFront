@@ -9,15 +9,9 @@ module.exports = {
       fontFamily: {
         SecFont: ["SecFont", "serif"],
         Berk: ["Berk", "serif"],
-        Poppins: ["Poppins", "serif"],
-        PlayFair: ["PlayFair", "serif"],
-        Noto: ["Noto", "serif"],
+
         PlayI: ["PlayI", "serif"],
-        Notos: ["Notos", "serif"],
-        IMFELL: ["IMFELL", "serif"],
-        Oswald: ["Oswald", "serif"],
-        Grad: ["Grad", "serif"],
-        Abril: ["Abril", "serif"],
+
         Inter: ["Inter", "sans"],
       },
       colors: {
