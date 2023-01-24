@@ -42,13 +42,13 @@ export default function Home() {
   const backGrounds = [
     {
       bg: "bg-[url('../public/TestImages/NightlifeNoiseFinal.jpg')] bg-center",
-      button: "Formal",
-      name: "Nigthlife",
+      button: "NightLife",
+      name: "NightLife",
       Night: true,
     },
     {
       bg: "bg-[url('../public/TestImages/JacketNoise1.jpg')]",
-      button: "NightLife",
+      button: "Jackets",
       name: "Jackets",
     },
     { auto: true, component: true },
@@ -70,6 +70,11 @@ export default function Home() {
     { bg: "bg-[url('../public/TestImages/A8.jpg')] bg-bottom", button: "" },
     { bg: "bg-[url('../public/TestImages/A10.jpg')] bg-bottom", button: "" },
     { bg: "bg-[url('../public/TestImages/WWWW.jpg')] bg-bottom", button: "" },
+  ];
+
+  const words = [
+    ["Socials", "Contact"],
+    ["FAQ", "Services"],
   ];
 
   return (
@@ -154,15 +159,87 @@ export default function Home() {
               key={item.bg}
               className={`h-screen flex-col items-center ${item.bg} justify-center flex   w-full object-none bg-cover relative`}
             >
-              <div className="font-PlayI text-2xl absolute left-4 w-44  ">
-                AUTHENTIC LEATHER
+              <div
+                className={`${
+                  item.name === "NightLife" ? "" : "hidden"
+                } font-SecFont text-2xl absolute right-0 w-44 top-32  `}
+              >
+                {["   A Red Evening ", "at an unKnown", "berlin bar"].map(
+                  (wrd) => {
+                    return (
+                      <motion.div
+                        style={{
+                          display: "inline-block",
+                          overflow: "hidden",
+                        }}
+                        key={wrd}
+                      >
+                        <motion.div
+                          initial={{ opacity: 1, y: "100%" }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: false }}
+                          transition={{ duration: 0.7 }}
+                          className=""
+                        >
+                          {wrd}
+                        </motion.div>
+                      </motion.div>
+                    );
+                  }
+                )}{" "}
               </div>
-              <button className="border p-2 text-red-500 border-red-500 bg-black  font-Inter  flex items-center justify-center  text-[10px] absolute bottom-32 left-4">
+              <div
+                className={`${
+                  item.name === "Jackets" ? "" : "hidden"
+                } font-SecFont text-2xl absolute left-4 w-44 `}
+              >
+                100% Authentic
+              </div>
+              <div
+                className={`${
+                  item.footer ? "" : "hidden"
+                } absolute flex justify-between top-24 w-full p-2`}
+              >
+                {words.map((col, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="flex flex-col font-SecFont text-lg`"
+                    >
+                      {col.map((connect) => {
+                        return (
+                          <motion.button
+                            key={connect}
+                            style={{
+                              display: "inline-block",
+                              overflow: "hidden",
+                            }}
+                            className="border border-black mb-4 p-2"
+                          >
+                            <motion.div
+                              initial={{ opacity: 1, y: "100%" }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: false }}
+                              transition={{ duration: 0.7 }}
+                              className=""
+                            >
+                              {connect}
+                            </motion.div>
+                          </motion.button>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
+              </div>
+              <button
+                className={`${
+                  item.footer && "hidden"
+                } border p-2 text-red-500 border-red-500 bg-black  font-Inter  flex items-center justify-center  text-[10px] absolute bottom-32 left-4`}
+              >
                 Shop {item.name ? item.name : ""}{" "}
                 {BagIcon("fill-red-500 ml-2", "15", "15")}
               </button>
-
-              <div className=""></div>
             </div>
           );
         }
