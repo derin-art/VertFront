@@ -34,13 +34,7 @@ export default function Future(props: ShirtsProps) {
   }
   return (
     <div>
-      <div className="fixed flex h-screen w-full flex-col items-center border justify-center">
-        <div className="glitch-wrapper absolute -top-40 md:top-0 text-sm lg:text-3xl xl:text-4xl z-40 font-Berk tracking-wider">
-          <div className="glitch" data-glitch=" Vert Future State">
-            Vert Future State
-          </div>
-        </div>{" "}
-      </div>
+      <div className="fixed flex h-screen w-full flex-col items-center border justify-center"></div>
       {finalArray.map((item, index) => {
         return (
           <div

@@ -19,6 +19,7 @@ import Varsity from "../components/ModernTake/Varsity";
 
 import { useAppDispatch, useAppSelector } from "../hooks/useDispatch";
 import { it } from "node:test";
+import Link from "next/link";
 
 export default function Home() {
   const { height, width } = useMediaQuery();
@@ -45,12 +46,14 @@ export default function Home() {
       bg: "bg-[url('../public/TestImages/NightlifeNoiseFinal.jpg')] bg-center",
       button: "NightLife",
       name: "NightLife",
+      Link: "Risque",
       Night: true,
     },
     {
       bg: "bg-[url('../public/TestImages/JacketNoise1.jpg')]",
       button: "Jackets",
       name: "Jackets",
+      Link: "Jacket",
     },
     { auto: true, component: true },
 
@@ -58,6 +61,7 @@ export default function Home() {
       bg: "bg-[url('../public/TestImages/FormalBgNoise.jpg')] ",
       button: "",
       name: "Formal",
+      Link: "Formal",
     },
 
     {
@@ -192,7 +196,7 @@ export default function Home() {
               <div
                 className={`${
                   item.name === "Jackets" ? "" : "hidden"
-                } font-SecFont text-2xl absolute left-4 w-44 lg:text-4xl `}
+                } font-SecFont text-2xl absolute left-4 w-44 lg:text-4xl xl:text-6xl`}
               >
                 {["100%", "Authentic"].map((wrd) => {
                   return (
@@ -256,14 +260,17 @@ export default function Home() {
                   );
                 })}
               </div>
-              <button
+              <Link
+                href={` /${
+                  item.Link === "Jacket" ? `items/JACKETS` : item.Link
+                }`}
                 className={`${
                   item.footer && "hidden"
                 } border p-2 text-red-500 border-red-500  bg-black  font-Inter  flex items-center justify-center  text-[10px] absolute bottom-36 left-4 lg:left-auto lg:text-sm`}
               >
                 Shop {item.name ? item.name : ""}{" "}
                 {BagIcon("fill-red-500 ml-2", "15", "15")}
-              </button>
+              </Link>
             </div>
           );
         }

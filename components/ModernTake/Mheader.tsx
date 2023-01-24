@@ -44,6 +44,10 @@ export default function Mheader() {
   const { ITEM } = router.query;
   const Links = ["home", "items"];
   const otherLinks = ["SHIRTS", "JACKETS", "T-SHIRTS"];
+  const alternateLinks = [
+    { name: "2021 TimeLine", Link: "Time" },
+    { name: "Alternative", Link: "Future" },
+  ];
   const [openLogin, setOpenLogin] = useState(false);
   const collectionBool = useAppSelector((state) => state.collection.value);
   const cartVal = useAppSelector((state) => state.cart.value.cartItems);
@@ -470,7 +474,7 @@ export default function Mheader() {
       >
         {useFramerAnimation(
           <div className="absolute h-screen  w-full top-8 flex z-40 flex-col items-center  ">
-            <div className="mt-20 text-center ">
+            <div className="mt-10 text-center ">
               {otherLinks.map((item, index) => {
                 return (
                   <motion.div
@@ -490,6 +494,29 @@ export default function Mheader() {
                       href={`/items/${item}`}
                     >
                       {item}
+                    </Link>
+                  </motion.div>
+                );
+              })}
+              {alternateLinks.map((item, index) => {
+                return (
+                  <motion.div
+                    initial={{ x: 0 }}
+                    animate={{ x: 0 }}
+                    transition={{
+                      duration: 0.3,
+                      delay: index * 0.15,
+                    }}
+                    key={item.name}
+                    className="lg:text-7xl xl:text-8xl text-4xl text-red-500 blur-none font-SecFont  border-black w-screen mb-8 "
+                  >
+                    <Link
+                      onClick={() => {
+                        setCollectionOpen((prev) => !prev);
+                      }}
+                      href={`/${item.Link}`}
+                    >
+                      {item.name}
                     </Link>
                   </motion.div>
                 );
@@ -516,7 +543,7 @@ export default function Mheader() {
             <div className="absolute text-red-500 font-PlayI bottom-10 text-3xl">
               Vert
             </div>
-            <div className="absolute text-black font-Oswald  z-10 text-lg md:text-xl flex flex-col top-16">
+            <div className="absolute text-black font-Inter  z-10 text-lg md:text-xl flex flex-col top-16 lg:top-2">
               <button
                 onClick={() => {
                   dispatch(setOpenLoginRedux());
