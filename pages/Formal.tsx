@@ -27,7 +27,7 @@ type ProductProps = {
 
 export default function Formal(props: ProductProps) {
   return (
-    <div className="md:h-screen h-fit w-full bg-[url('../public/TestImages/RedBack.jpg')] flex items-center justify-center">
+    <div className="md:h-screen h-fit w-full bg-white flex items-center justify-center">
       <div className="w-4/5 h-4/5 flex items-center justify-around bg-white relative md:flex-row flex-col md:py-0 py-20 space-y-4 md:space-y-0">
         <div className="absolute top-2 left-2 text-3xl font-SecFont md:block hidden">
           Formal

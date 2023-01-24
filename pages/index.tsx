@@ -259,7 +259,7 @@ export default function Home() {
               <button
                 className={`${
                   item.footer && "hidden"
-                } border p-2 text-red-500 border-red-500 bg-black  font-Inter  flex items-center justify-center  text-[10px] absolute bottom-36 left-4 lg:left-auto lg:text-sm`}
+                } border p-2 text-red-500 border-red-500  bg-black  font-Inter  flex items-center justify-center  text-[10px] absolute bottom-36 left-4 lg:left-auto lg:text-sm`}
               >
                 Shop {item.name ? item.name : ""}{" "}
                 {BagIcon("fill-red-500 ml-2", "15", "15")}

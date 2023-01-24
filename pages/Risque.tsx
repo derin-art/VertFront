@@ -27,7 +27,7 @@ type ProductProps = {
 
 export default function Risque(props: ProductProps) {
   return (
-    <div className="md:h-screen h-fit w-full bg-[url('../public/TestImages/Back.jpg')] flex items-center justify-center">
+    <div className="md:h-screen h-fit w-full bg-white flex items-center justify-center">
       <div className="w-4/5 h-4/5 space-y-4 md:space-y-0 flex items-center py-20 md:py-0 justify-around bg-white relative md:flex-row flex-col">
         <div className="absolute top-2 left-2 text-3xl font-SecFont hidden md:block">
           NightLife

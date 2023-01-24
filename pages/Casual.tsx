@@ -26,7 +26,7 @@ type ProductProps = {
 
 export default function Casual(props: ProductProps) {
   return (
-    <div className="flex items-center justify-around bg-[url('../public/TestImages/AmberBack.jpg')] h-fit md:h-screen w-screen">
+    <div className="flex items-center justify-around bg-white h-fit md:h-screen w-screen">
       <div className="w-4/5 h-4/5 space-y-4 md:space-y-0 flex items-center py-20 md:py-0 justify-around bg-white relative md:flex-row flex-col">
         <div className="absolute top-2 left-2 text-3xl font-SecFont md:block hidden">
           Casual

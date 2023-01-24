@@ -306,15 +306,9 @@ export default function Mheader() {
       <div
         className={`w-full font-Inter text-xs fixed p-6 pl-2 md:p-0 flex duration-300 items-center ${
           collectionOpen || loginReduxState ? "z-[100]" : "z-30"
-        }  ${
-          !isOnRisque
-            ? isOn && !isOnTime
-              ? "bg-black text-white"
-              : isOnOtherCollection
-              ? "bg-black text-white"
-              : "text-black"
-            : "text-red-500"
-        }   `}
+        }  bg-transparent ${
+          router.asPath === "/" ? "text-white" : "text-black"
+        }  `}
       >
         <div className="flex ">
           {Links.map((item, index) => {
@@ -341,7 +335,7 @@ export default function Mheader() {
                       setCollectionOpen(false);
                     }
                   }}
-                  className={`md:mr-8  h-full z-50 md:p-6 text-white behindImage   hover:text-red-500 duration-300`}
+                  className={`md:mr-8  h-full z-50 md:p-6  behindImage   hover:text-red-500 duration-300`}
                 >
                   {item === "items" ? (
                     item
@@ -373,7 +367,7 @@ export default function Mheader() {
                       setCollectionOpen(false);
                     }
                   }}
-                  className={`md:mr-8 h-full z-50 text-white behindImage  md:p-6 hover:text-red-500 duration-300`}
+                  className={`md:mr-8 h-full z-50  behindImage  md:p-6 hover:text-red-500 duration-300`}
                 >
                   {item === "items" ? (
                     item
@@ -441,7 +435,7 @@ export default function Mheader() {
               </button>
             </div>
           )}
-          <Link href={"/Cart"} className="relative md:mr-6 mr-2 ">
+          <Link href={"/Cart"} className="relative md:mr-6 mr-2 text-black ">
             <span className="absolute font-Oswald text-sm -right-2 -top-2 h-4 w-4  flex items-center justify-center rounded-full">
               {cartVal.length}
             </span>
@@ -458,7 +452,7 @@ export default function Mheader() {
             }}
             transition={{ duration: 1 }}
             viewport={{ once: false }}
-            className="pl-2 z-50"
+            className="pl-2 z-50 text-black"
           >
             {ITEM ? <span className="text-red-500">{ITEM}</span> : ""} Vert
           </motion.p>
