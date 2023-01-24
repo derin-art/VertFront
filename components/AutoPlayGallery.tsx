@@ -66,7 +66,7 @@ export default function Auto(props: AutoPropsType) {
               key={item.bg}
               className={`h-screen flex-col items-center ${item.bg} justify-center flex  w-full object-none bg-cover`}
             >
-              <button className="absolute w-32 h-14 text-white flex  items-center justify-center bg-black p-2 font-Inter border-red-500 border text-[10px]">
+              <button className="absolute w-32 lg:w-48 lg:text-sm h-14 lg:h-12 text-white flex  items-center justify-center bg-black p-2 font-Inter border-red-500 border text-[10px]">
                 Shop {item.button} {BagIcon("fill-red-500 ml-2", "20", "20")}
               </button>
             </div>
@@ -81,7 +81,7 @@ export default function Auto(props: AutoPropsType) {
               onClick={() => {
                 setIndex(indexA);
               }}
-              className={`h-[13px]  border-gray-800 border ${
+              className={`h-[13px]   border-gray-800 border ${
                 indexA === index ? "bg-red-500 w-8" : "bg-black w-4"
               } duration-300`}
             ></button>

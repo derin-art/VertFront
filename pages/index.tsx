@@ -7,6 +7,7 @@ import Auto from "../components/AutoPlayGallery";
 import CartIcon from "../public/icons/cartIcon";
 import BagIcon from "../public/icons/BagIcon";
 import AltMainPage from "../components/AltMainPage";
+import SlantedArrow from "../public/icons/SlantedArrow";
 import CopyIcon from "../public/icons/copyIcon";
 
 import { motion } from "framer-motion";
@@ -130,7 +131,7 @@ export default function Home() {
         </div>
       </div>
       <div className="h-screen  flex-col items-center justify-end flex p-20 bg-top bg-[url('../public/TestImages/HomeLaptopN.jpg')]  lg:bg-[url('../public/TestImages/HomeLaptopN.jpg')] w-full object-none bg-cover">
-        <div className="text-red-500 font-Berk text-6xl absolute bottom-32">
+        <div className="text-red-500 font-Berk text-6xl lg:text-8xl absolute bottom-32">
           VERT
           <div className="text-red-500 font-Poppins text-center text-xs ">
             EST.
@@ -162,7 +163,7 @@ export default function Home() {
               <div
                 className={`${
                   item.name === "NightLife" ? "" : "hidden"
-                } font-SecFont text-2xl absolute right-0 w-44 top-32  `}
+                } font-SecFont text-2xl absolute right-0 w-44 top-32 lg:text-red-500  `}
               >
                 {["   A Red Evening ", "at an unKnown", "berlin bar"].map(
                   (wrd) => {
@@ -191,14 +192,34 @@ export default function Home() {
               <div
                 className={`${
                   item.name === "Jackets" ? "" : "hidden"
-                } font-SecFont text-2xl absolute left-4 w-44 `}
+                } font-SecFont text-2xl absolute left-4 w-44 lg:text-4xl `}
               >
-                100% Authentic
+                {["100%", "Authentic"].map((wrd) => {
+                  return (
+                    <motion.div
+                      style={{
+                        display: "inline-block",
+                        overflow: "hidden",
+                      }}
+                      key={wrd}
+                    >
+                      <motion.div
+                        initial={{ opacity: 1, y: "100%" }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: false }}
+                        transition={{ duration: 0.7 }}
+                        className=""
+                      >
+                        {wrd}
+                      </motion.div>
+                    </motion.div>
+                  );
+                })}
               </div>
               <div
                 className={`${
                   item.footer ? "" : "hidden"
-                } absolute flex justify-between top-24 w-full p-2`}
+                } absolute flex justify-between top-24 w-full p-2 lg:p-8 xl:p-20 lg:pt-6 xl:pt-6`}
               >
                 {words.map((col, index) => {
                   return (
@@ -214,16 +235,19 @@ export default function Home() {
                               display: "inline-block",
                               overflow: "hidden",
                             }}
-                            className="border border-black mb-4 p-2"
+                            className="border border-black mb-4 p-2 lg:text-xl"
                           >
                             <motion.div
                               initial={{ opacity: 1, y: "100%" }}
                               whileInView={{ opacity: 1, y: 0 }}
                               viewport={{ once: false }}
                               transition={{ duration: 0.7 }}
-                              className=""
+                              className="flex items-center justify-center"
                             >
-                              {connect}
+                              {connect}{" "}
+                              {SlantedArrow(
+                                "fill-black border border-black p-1 ml-2"
+                              )}
                             </motion.div>
                           </motion.button>
                         );
@@ -235,7 +259,7 @@ export default function Home() {
               <button
                 className={`${
                   item.footer && "hidden"
-                } border p-2 text-red-500 border-red-500 bg-black  font-Inter  flex items-center justify-center  text-[10px] absolute bottom-32 left-4`}
+                } border p-2 text-red-500 border-red-500 bg-black  font-Inter  flex items-center justify-center  text-[10px] absolute bottom-36 left-4 lg:left-auto lg:text-sm`}
               >
                 Shop {item.name ? item.name : ""}{" "}
                 {BagIcon("fill-red-500 ml-2", "15", "15")}

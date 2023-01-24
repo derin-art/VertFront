@@ -480,14 +480,14 @@ export default function Mheader() {
               {otherLinks.map((item, index) => {
                 return (
                   <motion.div
-                    initial={!isMobileScreen ? { x: -400 } : { x: 0 }}
-                    animate={!isMobileScreen ? { x: 0 } : {}}
+                    initial={{ x: 0 }}
+                    animate={{ x: 0 }}
                     transition={{
                       duration: 0.3,
                       delay: index * 0.15,
                     }}
                     key={item}
-                    className="lg:text-7xl xl:text-8xl text-3xl text-red-500 blur-none font-Berk  border-black w-screen mb-8 "
+                    className="lg:text-7xl xl:text-8xl text-4xl text-red-500 blur-none font-SecFont  border-black w-screen mb-8 "
                   >
                     <Link
                       onClick={() => {
@@ -495,7 +495,7 @@ export default function Mheader() {
                       }}
                       href={`/items/${item}`}
                     >
-                      {item}!
+                      {item}
                     </Link>
                   </motion.div>
                 );
