@@ -63,10 +63,6 @@ a {
   scroll-snap-type: y mandatory;
 }
 
-.backGroundLogin {
-  background-image: url("../public/TestImages/LoginImg.jpg");
-}
-
 .linesB {
   min-height: 100%;
   background: linear-gradient(black 0 0) calc(1 * 100% / 4),

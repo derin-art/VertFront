@@ -125,10 +125,12 @@ export default function Home() {
         </div>
       </div>
       <div className="h-screen  flex-col items-center justify-end flex p-20 bg-top bg-[url('../public/TestImages/HomeLaptopN.jpg')]  lg:bg-[url('../public/TestImages/HomeLaptopN.jpg')] w-full object-none bg-cover">
-        <div className="text-red-500 font-Berk text-6xl">VERT</div>
-        <div className="text-red-500 font-Poppins text-center text-xs ">
-          EST.
-          <div className="text-lg">1988</div>
+        <div className="text-red-500 font-Berk text-6xl absolute bottom-32">
+          VERT
+          <div className="text-red-500 font-Poppins text-center text-xs ">
+            EST.
+            <div className="text-lg">1988</div>
+          </div>
         </div>
       </div>
 
@@ -152,7 +154,10 @@ export default function Home() {
               key={item.bg}
               className={`h-screen flex-col items-center ${item.bg} justify-center flex   w-full object-none bg-cover relative`}
             >
-              <button className="border p-2 text-red-500 border-red-500 bg-black  font-Inter  flex items-center justify-center  text-[10px] absolute bottom-20 left-4">
+              <div className="font-PlayI text-2xl absolute left-4 w-44  ">
+                AUTHENTIC LEATHER
+              </div>
+              <button className="border p-2 text-red-500 border-red-500 bg-black  font-Inter  flex items-center justify-center  text-[10px] absolute bottom-32 left-4">
                 Shop {item.name ? item.name : ""}{" "}
                 {BagIcon("fill-red-500 ml-2", "15", "15")}
               </button>
