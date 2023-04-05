@@ -147,7 +147,7 @@ export default function Collection(props: CollectionProps) {
           {images.map((item, index) => {
             return (
               <Link
-                className="text-red-500 font-Berk text-lg "
+                className="text-red-500 font-Berk text-lg border border-gray-500 p-2"
                 href={`/${item.name}`}
                 key={index}
               >

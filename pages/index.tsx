@@ -59,13 +59,7 @@ export default function Home() {
       <Collection toastId={toastId}></Collection>
       <Varsity toastId={toastId}></Varsity>
       <div className="h-screen bg-white flex items-center justify-center md:snap-center">
-        <div className="w-10/12  h-3/4 hidden md:block relative flex justify-end text-right p-8">
-          <div className=" w-fit font-Berk absolute left-4 line-through lg:text-[150px] md:text-[100px] text-[100px] xl:text-[250px] text-gray-200">
-            VERT
-          </div>
-        </div>
-
-        <div className="flex flex-col lg:h-5/6 h-full justify-center w-4/5  lg:w-2/12 mt-12 space-y-8">
+        <div className="flex lg:flex-row flex-col lg:h-5/6 h-full justify-center w-full  justify-center items-center text-center  mt-12 space-y-8">
           {footerInfo.map((item, index) => {
             return (
               <div
@@ -73,7 +67,7 @@ export default function Home() {
                 className={` relative border-red-500 group cursor-pointer font-Poppins text-xs border-r-0 text-red-500 lg:h-1/3 w-full  flex justify-center flex-col p-2`}
               >
                 {CopyIcon("group-hover:opacity-100 opacity-0 duration-300")}
-                <div className="font-Oswald text-xl z-30 ">{item.name}</div>
+                <div className="text-xl z-30 ">{item.name}</div>
                 <div className="z-30">{item.info}</div>
               </div>
             );

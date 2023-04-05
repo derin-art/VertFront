@@ -23,12 +23,12 @@ export default function Varsity(props: VarsityProps) {
         onMouseLeave={() => {
           setMouseIsOverExplore((prev) => false);
         }}
-        className="absolute mt-48 font-Grad border text-black border-black p-2 z-20"
+        className="absolute mt-48 font-Berk border text-black border-black p-2 z-20"
       >
         Explore our Varsity Offering
       </Link>
       <div
-        className={`absolute xl:text-9xl lg:text-7xl duration-300 text-4xl font-SecFont ${
+        className={`absolute xl:text-9xl lg:text-7xl duration-300 text-4xl font-Grad ${
           isMouseOverExplore ? "text-red-500" : "text-black"
         }`}
       >
