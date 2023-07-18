@@ -1,7 +1,13 @@
 /** @type {import('next').NextConfig} */
+const withTM = require("next-transpile-modules")([
+  "three",
+  "@react-three/fiber",
+  "@react-three/drei",
+]);
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  transpilePackages: ["@react-three/fiber", "three"],
   images: {
     domains: ["res.cloudinary.com"],
     remotePatterns: [
@@ -10,6 +16,23 @@ const nextConfig = {
         hostname: "res.cloudinary.com",
       },
     ],
+  },
+  webpack: (config, { isServer }) => {
+    // Fixes npm packages that depend on `fs` module
+    if (!isServer) {
+      config.node = {
+        fs: "empty",
+      };
+    }
+
+    config.module.rules.push({
+      test: /\.(glsl|vs|fs|vert|frag)$/,
+      exclude: /node_modules/,
+      type: "asset/source",
+      use: "raw-loader",
+    });
+
+    return config;
   },
   async headers() {
     return [
@@ -35,4 +58,4 @@ const nextConfig = {
 };
 
 //localhost:3000//api/customerChanges
-module.exports = nextConfig;
+module.exports = { nextConfig };

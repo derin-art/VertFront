@@ -51,6 +51,11 @@ a {
   src: url("../public/font/Inter/Inter-VariableFont_slnt\,wght.ttf");
 }
 
+@font-face {
+  font-family: Wagon;
+  src: url("../public/font/wagon-serif-dirtyline-studio-181121/Wagon/Wagon-ExtraLight.otf");
+}
+
 .snapCont {
   scroll-snap-type: y mandatory;
 }
@@ -149,4 +154,37 @@ a {
 
 .behindImage {
   mix-blend-mode: difference;
+}
+
+@font-face {
+  font-family: Armate;
+  src: url("../public/font/Amarante/Amarante-Regular.ttf");
+}
+
+.bb {
+  height: 200vh;
+}
+
+.yee {
+  position: fixed;
+}
+
+.movv {
+}
+
+.section1 {
+}
+
+.section2 {
+}
+.section3 {
+}
+
+.sectionA {
+}
+.sectionB {
+}
+.sectionC {
+}
+.sectionD {
 }

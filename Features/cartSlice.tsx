@@ -42,7 +42,6 @@ export const cartSlice = createSlice({
       });
       let arr = [...state.value.cartItems];
 
-     
       state.value.cartItems = [...state.value.cartItems].filter(
         (item: any, index) => {
           if (index === deleteArray[0].index) return;

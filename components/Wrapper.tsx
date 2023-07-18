@@ -6,6 +6,8 @@ import { update, ifErrorUpdate, notify } from "../hooks/useToastPopup";
 
 type WrapperProps = {
   children: any;
+  location: any,
+  
 };
 
 export default function Wrapper(props: WrapperProps) {

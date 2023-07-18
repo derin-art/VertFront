@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -13,6 +14,8 @@ module.exports = {
         PlayI: ["PlayI", "serif"],
 
         Inter: ["Inter", "sans"],
+        Wagon: ["Wagon", "serif"],
+        Armate: ["Armate", "serif"],
       },
       colors: {
         MikYellow: "#FEC601",

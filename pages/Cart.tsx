@@ -2,11 +2,12 @@ import { useAppSelector, useAppDispatch } from "../hooks/useDispatch";
 import { ToastContainer, toast } from "react-toastify";
 import { setOpenLoginRedux } from "../Features/authSlice";
 import { clearCart } from "../Features/cartSlice";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ifErrorUpdate, notify, update } from "../hooks/useToastPopup";
 import CartItem from "../components/ModernTake/CartItem";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 export default function Cart() {
   const toastId: any = useRef(null);
@@ -106,9 +107,49 @@ export default function Cart() {
     }
   };
 
+  const [yam, secondState] = useState(false);
+  const [another, setAnother] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      secondState(true);
+    }, 3000);
+  }, []);
+
   return (
-    <div className="flex items-center justify-center pt-20  h-screen relative overflow-hidden bg-white text-black">
-      <div className=" md:p-4 p-2 w-full  md:w-4/5 h-full">
+    <motion.div
+      className={`flex duration-300 items-center justify-center pt-20  h-screen relative overflow-hidden ${
+        another ? "bg-white" : "bg-red-500"
+      } text-black`}
+    >
+      <motion.div
+        transition={{ duration: 1 }}
+        onAnimationComplete={() => {
+          setAnother(true);
+        }}
+        animate={yam && { translateY: "-100%" }}
+        className="fixed top-0 w-full h-full flex items-center justify-center"
+      >
+        <motion.div
+          initial={{ opacity: 1, translateY: "100%" }}
+          animate={{
+            opacity: 1,
+            translateY: "0%",
+
+            transition: { duration: 1 },
+          }}
+          transition={{ duration: 1.2 }}
+          className="w-full h-full bg-red-500 flex items-center justify-center text-white text-[250px] font-Wagon"
+        >
+          TAR
+        </motion.div>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 4 }}
+        className=" md:p-4 p-2 w-full  md:w-4/5 h-full"
+      >
         <div className="font-Inter text-red-500 text-sm ml-2 -mt-2">Cart</div>
         <div className="flex md:flex-row flex-col w-full h-full">
           <div className="flex flex-col w-full md:w-3/4 h-96  md:h-4/5 overflow-auto z-30 p-2">
@@ -136,6 +177,7 @@ export default function Cart() {
               Check Out
             </button>
           </div>
+
           <div className="h-2/4 w-full flex items-center  flex-col text-black bg-white border z-30 absolute left-0 -bottom-1/3 border-t md:hidden">
             <div className="text-black font-Inter">Grand Total</div>
             <div className="font-PlayI ">${grandTotal}</div>
@@ -149,7 +191,8 @@ export default function Cart() {
             </button>
           </div>
         </div>
-      </div>
-    </div>
+        <div className="h-screen w-full"></div>
+      </motion.div>
+    </motion.div>
   );
 }
